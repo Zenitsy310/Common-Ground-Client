@@ -13,8 +13,8 @@ public class UserHolder extends RecyclerView.ViewHolder{
     TextView login, email, created_at;
     public UserHolder(@NonNull View itemView) {
         super(itemView);
-        login = itemView.findViewById(R.id.userListItem_login);
-        email = itemView.findViewById(R.id.userListItem_email);
-        created_at = itemView.findViewById(R.id.userListItem_created_at);
+        login = itemView.findViewById(R.id.user_name);
+        email = itemView.findViewById(R.id.user_email);
+        created_at = itemView.findViewById(R.id.user_role);
     }
 }

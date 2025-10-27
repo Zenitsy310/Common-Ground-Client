@@ -26,8 +26,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-
+    <string name="no_users_found">No users found</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="more_actions">More actions</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
