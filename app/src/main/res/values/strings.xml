@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Common Ground</string>
 
+    <string name="form_title">Users list</string>
+    <string name="avatar_description">Avatar description</string>
+    <string name="change_avatar">Change avatar</string>
+    <string name="form_password">password</string>
+    <string name="form_bio">Bio</string>
+    <string name="form_role">Role</string>
+    <string name="button_cancel">Cancel</string>
+
     <string name="form_name">Authtorization</string>
     <string name="form_first_name">First name</string>
     <string name="form_last_name">Last name</string>

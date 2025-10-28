@@ -25,6 +25,8 @@ import com.ark_das.springclient.adapter.LoginResponse;
 import com.ark_das.springclient.retrofit.RetrofitService;
 import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mobsandgeeks.saripaar.annotation.Order;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -39,10 +41,13 @@ public class LoginForm extends AppCompatActivity implements Validator.Validation
     private Validator validator;
 
     @NotEmpty(message = "Введите почту")
+    @Pattern(regex = ".*[@].*", message = "Укажите вашу полную почту, включая символ @")
     @Length(min = 3, message = "В почте должно быть не короче 3 символов")
+    @Order(1)
     TextInputEditText emailEditText;
 
     @NotEmpty(message = "Введите пароль")
+    @Order(2)
     TextInputEditText passwordEditText;
 
     TextInputLayout layoutEmail, layoutPassword;

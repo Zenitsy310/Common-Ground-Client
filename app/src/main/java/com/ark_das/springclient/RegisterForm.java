@@ -24,6 +24,7 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Order;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Pattern;
 
@@ -43,22 +44,27 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
 
     @NotEmpty(message = "Введите ваше имя")
     @Length(min = 2, message = "В имени должно быть не меньше 2 символов")
+    @Order(1)
     TextInputEditText firstNameEditText;
 
     @NotEmpty(message = "Введите вашу фамиилю")
     @Length(min = 2, message = "В фамилии должно быть не меньше 2 символов")
+    @Order(2)
     TextInputEditText lastNameEditText;
 
     @NotEmpty(message = "Введите почту")
     @Pattern(regex = ".*[@].*", message = "Укажите вашу полную почту, включая символ @")
     @Length(min = 3, message = "В почте должно быть не короче 3 символов")
+    @Order(3)
     TextInputEditText emailEditText;
 
     @Password(min = 8, message = "Пароль должен содержать минимум 8 символов")
     @Pattern(regex = ".*[A-Z].*", message = "Пароль должен содержать хотя бы одну заглавную букву")
+    @Order(4)
     TextInputEditText passwordEditText;
 
     @ConfirmPassword(message = "Пароли не совпадают")
+    @Order(5)
     TextInputEditText confirmPasswordEditText;
 
     AppCompatTextView signInLink;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_add_user_form"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -234,18 +235,20 @@
 
                     <!-- Роль -->
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         app:hintTextColor="@color/mainGreen"
                         app:boxStrokeColor="@color/mainPurple"
-                        app:endIconTint="@color/mainPurple"
-                        app:endIconMode="dropdown_menu">
+                        app:endIconTint="@color/mainPurple">
 
                         <AutoCompleteTextView
                             android:id="@+id/form_spinnerRole"
-                            android:hint="@string/form_role"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:hint="@string/form_role"
+                            android:inputType="none"
                             android:textColor="@color/mainGreen"
                             android:textSize="16sp" />
 
