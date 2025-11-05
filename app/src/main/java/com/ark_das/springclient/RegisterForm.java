@@ -123,6 +123,7 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
     public void onValidationSucceeded() {
 
         clearEditTextLayouts();
+
         String first_name = String.valueOf(firstNameEditText.getText());
         String last_name = String.valueOf(lastNameEditText.getText());
         String email = String.valueOf(emailEditText.getText());
@@ -138,12 +139,12 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
-       userApi.register(register_user)
+        userApi.register(register_user)
                 .enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if(response.isSuccessful() && response.body().isSuccess()){
-                            Toast.makeText(RegisterForm.this, "Register successful!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterForm.this, UserListActivity.class);
                             startActivity(intent);
                         }else{

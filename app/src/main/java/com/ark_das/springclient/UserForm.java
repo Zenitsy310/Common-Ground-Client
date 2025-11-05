@@ -1,8 +1,10 @@
 package com.ark_das.springclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,11 +13,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.ark_das.springclient.adapter.LoginResponse;
+import com.ark_das.springclient.model.Role;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
+import com.ark_das.springclient.retrofit.RoleApi;
 import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
@@ -23,6 +29,7 @@ import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Pattern;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,19 +37,21 @@ import java.util.logging.Logger;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
 
     //Layouts for inputEditText
-    //TextInputLayout
-
+    TextInputLayout layout_form_textFieldFirstName, layout_form_textFieldLastName,
+            layout_form_textFieldEmail, layout_form_textFieldLogin, layout_form_textFieldPassword,
+            layout_form_textFieldBio, layout_form_spinnerRole;
 
     //InputEditText from form
     @NotEmpty(message = "Введите ваше имя")
     @Length(min = 2, message = "В имени должно быть не меньше 2 символов")
     TextInputEditText inpuntEditTextFirstName;
 
-    @NotEmpty(message = "Введите вашу фамиилю")
+    @NotEmpty(message = "Введите вашу фамилию")
     @Length(min = 2, message = "В фамилии должно быть не меньше 2 символов")
     TextInputEditText inpuntEditTextLastName;
 
@@ -55,12 +64,18 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
     @Pattern(regex = ".*[A-Z].*", message = "Пароль должен содержать хотя бы одну заглавную букву")
     TextInputEditText inpuntEditTextPassword;
 
+    @NotEmpty(message = "Введите логин")
+    @Length(min = 3, message = "В лоигне должно быть не короче 3 символов")
+    TextInputEditText inpuntEditTextLogin;
 
     TextInputEditText inputBio;
 
-    @NotEmpty(message = "Выберете роль")
-    AutoCompleteTextView form_spinnerRole;
+    /*@NotEmpty(message = "Выберите роль")*/
+    Spinner form_spinnerRole;
 
+    private List<Role> roles;
+    private Validator validator;
+    private int selectedRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,82 +88,188 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             return insets;
         });
 
-         initializeComponents();
-        }
+        initializeComponents();
+    }
 
-    private void initializeComponents(){
+    private void initializeComponents() {
+        // Инициализация layout
+        layout_form_textFieldFirstName = findViewById(R.id.layout_form_textFieldFirstName);
+        layout_form_textFieldLastName = findViewById(R.id.layout_form_textFieldLastName);
+        layout_form_textFieldEmail = findViewById(R.id.layout_form_textFieldEmail);
+        layout_form_textFieldLogin = findViewById(R.id.layout_form_textFieldLogin);
+        layout_form_textFieldPassword = findViewById(R.id.layout_form_textFieldPassword);
+        layout_form_textFieldBio = findViewById(R.id.layout_form_textFieldBio);
+        layout_form_spinnerRole = findViewById(R.id.layout_form_spinnerRole);
+
+        // Инициализация полей ввода
         inpuntEditTextFirstName = findViewById(R.id.form_textFieldFirstName);
         inpuntEditTextLastName = findViewById(R.id.form_textFieldLastName);
         inpuntEditTextEmail = findViewById(R.id.form_textFieldEmail);
-        //inpuntEditTextLogin = findViewById(R.id.form_textFieldLogin);
         inpuntEditTextPassword = findViewById(R.id.form_textFieldPassword);
+        inpuntEditTextLogin = findViewById(R.id.form_textFieldLogin);
+        inputBio = findViewById(R.id.form_textFieldBio);
+        form_spinnerRole = findViewById(R.id.form_spinnerRole);
+
+        // Инициализация валидатора
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         MaterialButton buttonSave = findViewById(R.id.form_buttonSave);
+        MaterialButton buttonCancel = findViewById(R.id.form_buttonCancel);
 
+        // Запуск валидации по клику
+        buttonSave.setOnClickListener(view -> {
+            validator.validate();
+        });
 
-        //adduser()
-        buttonSave.setOnClickListener(view -> onValidationSucceeded());
+        buttonCancel.setOnClickListener(view -> {
+            Intent intent = new Intent(UserForm.this, UserListActivity.class);
+            startActivity(intent);
+        });
 
+        // Инициализация списка ролей
+        roles = new ArrayList<>();
 
+        // Загрузка ролей с сервера
+        loadRoles();
     }
 
-    private void adduser(){
+    private void loadRoles() {
+        RetrofitService retrofitService = new RetrofitService();
+        RoleApi roleApi = retrofitService.getRetrofit().create(RoleApi.class);
 
+        roleApi.getAllRoles().enqueue(new Callback<List<Role>>() {
+            @Override
+            public void onResponse(Call<List<Role>> call, Response<List<Role>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    roles.clear();
+                    roles.addAll(response.body());
+                    setupRoleSpinner();
+                    Logger.getLogger(UserForm.class.getName()).log(Level.INFO, "Roles loaded: " + roles.size());
+                } else {
+                    Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Failed to load roles");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Role>> call, Throwable t) {
+                Toast.makeText(UserForm.this, "Failed to load roles", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+    }
+
+    private void setupRoleSpinner() {
+        // Создаем список названий ролей для отображения
+        List<String> roleNames = new ArrayList<>();
+        for (Role role : roles) {
+            roleNames.add(role.getName()); // предполагая, что у Role есть метод getName()
+        }
+
+        // Создаем адаптер для Spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                roleNames
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        form_spinnerRole.setAdapter(adapter);
+
+        // Обработчик выбора роли
+        form_spinnerRole.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
+                selectedRoleId = roles.get(position).getId(); // сохраняем ID выбранной роли
+                layout_form_spinnerRole.setError(null); // убираем ошибку при выборе
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {
+                selectedRoleId = 0;
+            }
+        });
     }
 
     @Override
     public void onValidationSucceeded() {
+        clearAllErrors();
+
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
-        String first_name = String.valueOf(inpuntEditTextFirstName.getText());
-        String last_name = String.valueOf(inpuntEditTextLastName.getText());
-        String email = String.valueOf(inpuntEditTextEmail.getText());
-        //String login = String.valueOf(inpuntEditTextLogin.getText());
-        String password = String.valueOf(inpuntEditTextPassword.getText());
+
+        String first_name = inpuntEditTextFirstName.getText().toString().trim();
+        String last_name = inpuntEditTextLastName.getText().toString().trim();
+        String email = inpuntEditTextEmail.getText().toString().trim();
+        String login = inpuntEditTextLogin.getText().toString().trim();
+        String password = inpuntEditTextPassword.getText().toString().trim();
+        String bio = inputBio.getText().toString().trim();
 
         User user = new User();
         user.setFirst_name(first_name);
         user.setLast_name(last_name);
         user.setEmail(email);
-        //user.setLogin(login);
         user.setPassword(password);
+        user.setLogin(login);
+        user.setBio(bio);
+        user.setRole_id(selectedRoleId); // устанавливаем выбранную роль
 
-        //user.setCreated_at(LocalDateTime.now());
-
-        userApi.save(user)
-                .enqueue(new Callback<User>() {
+        userApi.register(user)
+                .enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(UserForm.this, "Save successful!", Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if(response.isSuccessful() && response.body().isSuccess()){
+                            Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(UserForm.this,
+                                    response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(UserForm.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
-                        Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occured", t);
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Toast.makeText(UserForm.this, "Server eror", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
                     }
                 });
-        }
-
+    }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
-        /*for (ValidationError error : errors) {
+        // Сначала убираем все ошибки
+        clearAllErrors();
+
+        for (ValidationError error : errors) {
             View view = error.getView();
             String message = error.getCollatedErrorMessage(this);
 
-            if (view.getId() == R.id.firstNameEditText) {
-                firstNameLayout.setError(message);
-            } else if (view.getId() == R.id.lastNameEditText) {
-                lastNameLayout.setError(message);
-            } else if (view.getId() == R.id.emailEditText) {
-                emailLayout.setError(message);
-            } else if (view.getId() == R.id.passwordEditText) {
-                passwordLayout.setError(message);
-            }else if (view.getId() == R.id.confirmPasswordEditText) {
-                confirmPasswordLayout.setError(message);
+            // Устанавливаем ошибки для соответствующих полей
+            if (view.getId() == R.id.form_textFieldFirstName) {
+                layout_form_textFieldFirstName.setError(message);
+            } else if (view.getId() == R.id.form_textFieldLastName) {
+                layout_form_textFieldLastName.setError(message);
+            } else if (view.getId() == R.id.form_textFieldEmail) {
+                layout_form_textFieldEmail.setError(message); // ← исправлено было layout_form_textFieldLogin
+            } else if (view.getId() == R.id.form_textFieldPassword) {
+                layout_form_textFieldPassword.setError(message);
+            } else if (view.getId() == R.id.form_textFieldLogin) {
+                layout_form_textFieldPassword.setError(message);
+            } else if (view.getId() == R.id.form_textFieldBio) {
+                layout_form_textFieldBio.setError(message);
+            } else if (view.getId() == R.id.form_spinnerRole) {
+                layout_form_spinnerRole.setError(message);
             } else {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            }*/
+            }
+        }
+    }
+
+    private void clearAllErrors() {
+        layout_form_textFieldFirstName.setError(null);
+        layout_form_textFieldLastName.setError(null);
+        layout_form_textFieldEmail.setError(null);
+        layout_form_textFieldPassword.setError(null);
+        layout_form_textFieldLogin.setError(null);
+        layout_form_textFieldBio.setError(null);
+        layout_form_spinnerRole.setError(null);
     }
 }
