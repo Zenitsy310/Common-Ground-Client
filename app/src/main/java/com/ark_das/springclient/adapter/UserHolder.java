@@ -10,11 +10,12 @@ import com.ark_das.springclient.R;
 
 public class UserHolder extends RecyclerView.ViewHolder{
 
-    TextView login, email, created_at;
+    TextView first_name, last_name, email, role;
     public UserHolder(@NonNull View itemView) {
         super(itemView);
-        login = itemView.findViewById(R.id.user_name);
+        first_name = itemView.findViewById(R.id.user_first_name);
+        last_name = itemView.findViewById(R.id.user_last_name);
         email = itemView.findViewById(R.id.user_email);
-        created_at = itemView.findViewById(R.id.user_role);
+        role = itemView.findViewById(R.id.user_role);
     }
 }

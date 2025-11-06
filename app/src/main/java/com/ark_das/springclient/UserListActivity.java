@@ -1,6 +1,5 @@
 package com.ark_das.springclient;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ark_das.springclient.adapter.UserAdapter;
+import com.ark_das.springclient.model.Role;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
+import com.ark_das.springclient.retrofit.RoleApi;
 import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,6 +33,8 @@ public class UserListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private long backPressedTime = 0;
+
+    private List<Role> roles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,8 @@ public class UserListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UserForm.class);
             startActivity(intent);
         });
-
         setupBackPressedCallback();
+        loadRoles();
         loadUsers();
 
     }
@@ -85,7 +88,7 @@ public class UserListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<User>>() {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                        populateListView(response.body());
+                        populateListView(response.body(), roles);
                         Logger.getLogger(UserListActivity.class.getName()).log(Level.SEVERE, "Error occured");
                     }
 
@@ -97,8 +100,36 @@ public class UserListActivity extends AppCompatActivity {
                 });
     }
 
-    private void populateListView(List<User> userList) {
-        UserAdapter userAdapter = new UserAdapter(userList);
+    private void loadRoles() {
+        RetrofitService retrofitService = new RetrofitService();
+        RoleApi roleApi = retrofitService.getRetrofit().create(RoleApi.class);
+
+        roleApi.getAllRoles().enqueue(new Callback<List<Role>>() {
+            @Override
+            public void onResponse(Call<List<Role>> call, Response<List<Role>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        roles.clear();
+                    }catch (Exception e){
+                        Logger.getLogger(UserListActivity.class.getName()).log(Level.INFO, "null");
+                    }
+                    roles.addAll(response.body());
+                    Logger.getLogger(UserListActivity.class.getName()).log(Level.INFO, "Roles loaded: " + roles.size());
+                } else {
+                    Logger.getLogger(UserListActivity.class.getName()).log(Level.SEVERE, "Failed to load roles");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Role>> call, Throwable t) {
+                Toast.makeText(UserListActivity.this, "Failed to load roles", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+    }
+
+    private void populateListView(List<User> userList, List<Role> roles) {
+        UserAdapter userAdapter = new UserAdapter(userList, roles);
         recyclerView.setAdapter(userAdapter);
     }
 

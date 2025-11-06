@@ -21,7 +21,6 @@
             android:background="@color/mainGreen"
             app:title="@string/form_title"
             app:titleTextColor="@color/white"
-            app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
