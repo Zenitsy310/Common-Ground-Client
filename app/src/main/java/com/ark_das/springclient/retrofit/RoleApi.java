@@ -14,4 +14,5 @@ public interface RoleApi {
     @GET("role/get-all")
     Call<List<Role>> getAllRoles();
 
+
 }
