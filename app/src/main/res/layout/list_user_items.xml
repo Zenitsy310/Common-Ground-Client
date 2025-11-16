@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="6dp"
+    android:layout_margin="12dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
     app:cardBackgroundColor="@color/ultraLightPurple">
@@ -13,10 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="12dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
 
         <!-- Аватар пользователя -->
         <ImageView
@@ -29,6 +35,18 @@
             android:contentDescription="@string/user_avatar"
             app:tint="@color/white"
             android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/id"
+            android:textColor="@color/mainGreen"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
 
         <!-- Информация о пользователе -->
         <LinearLayout
@@ -68,7 +86,7 @@
                 android:id="@+id/user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/mainPurple"
                 tools:text="@string/email" />
 
@@ -82,7 +100,7 @@
                 android:paddingVertical="2dp"
                 android:background="@color/mainGreen"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:textAllCaps="true"
                 tools:text="@string/role" />
 
@@ -91,8 +109,8 @@
         <!-- Кнопка действий -->
         <ImageButton
             android:id="@+id/user_action"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@android:drawable/ic_menu_more"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/more_actions"

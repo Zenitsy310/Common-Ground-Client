@@ -58,6 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
         // Получаем название роли
         String roleName = getRoleName(user.getRole_id());
         holder.role.setText(roleName);
+        holder.id.setText(String.valueOf(user.getId() != 0 ? user.getId() : 0));
     }
 
     private String getRoleName(int roleId) {
