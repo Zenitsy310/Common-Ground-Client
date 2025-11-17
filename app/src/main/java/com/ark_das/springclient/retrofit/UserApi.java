@@ -1,7 +1,9 @@
 package com.ark_das.springclient.retrofit;
 
-import com.ark_das.springclient.adapter.LoginRequest;
-import com.ark_das.springclient.adapter.LoginResponse;
+import com.ark_das.springclient.dto.LoginRequest;
+import com.ark_das.springclient.dto.LoginResponse;
+import com.ark_das.springclient.dto.UserRequest;
+import com.ark_das.springclient.dto.UserResponse;
 import com.ark_das.springclient.model.User;
 import java.util.List;
 import retrofit2.Call;
@@ -22,6 +24,9 @@ public interface UserApi {
 
     @POST("/user/register")
     Call<LoginResponse> register(@Body User user);
+
+    @POST("/user/get-by-id")
+    Call<UserResponse> getById(@Body UserRequest userRequest);
 
 
 }

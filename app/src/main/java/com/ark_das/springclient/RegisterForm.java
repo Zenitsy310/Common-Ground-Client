@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.ark_das.springclient.adapter.LoginResponse;
+import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
 import com.ark_das.springclient.retrofit.UserApi;
