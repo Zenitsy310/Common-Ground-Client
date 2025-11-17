@@ -1,7 +1,4 @@
-package com.ark_das.springclient.adapter;
-
-
-import com.ark_das.springclient.model.User;
+package com.ark_das.springclient.dto;
 
 
 public class LoginRequest {

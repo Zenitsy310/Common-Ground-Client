@@ -13,7 +13,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.ark_das.springclient.adapter.LoginResponse;
+import com.ark_das.springclient.dto.LoginResponse;
+import com.ark_das.springclient.dto.UserRequest;
+import com.ark_das.springclient.dto.UserResponse;
 import com.ark_das.springclient.model.Role;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
@@ -37,9 +39,12 @@ import java.util.logging.Logger;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
+    //private User userId;
+    private Bundle arguments;
+    private int userId;
+    private String mode;
 
     //Layouts for inputEditText
     TextInputLayout layout_form_textFieldFirstName, layout_form_textFieldLastName,
@@ -70,7 +75,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
     TextInputEditText inputBio;
 
-    /*@NotEmpty(message = "Выберите роль")*/
     Spinner form_spinnerRole;
 
     private List<Role> roles;
@@ -87,11 +91,22 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Intent intent = getIntent();
+        if (intent != null) {
+            arguments = intent.getExtras();
+            if (arguments != null) {
+                userId = arguments.getInt("userId");
+                mode = arguments.getString("mode");
 
+                Logger.getLogger(UserForm.class.getName()).log(Level.INFO,
+                        "Received arguments - userId: " + userId + ", mode: " + mode);
+            }
+        }
         initializeComponents();
     }
 
     private void initializeComponents() {
+
         // Инициализация layout
         layout_form_textFieldFirstName = findViewById(R.id.layout_form_textFieldFirstName);
         layout_form_textFieldLastName = findViewById(R.id.layout_form_textFieldLastName);
@@ -132,6 +147,53 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
         // Загрузка ролей с сервера
         loadRoles();
+        if(arguments.get("mode") != null && arguments.get("mode").equals("update")){
+            setUserInfoById();
+        }
+
+    }
+
+    private void fillForm(User user) {
+        inpuntEditTextFirstName.setText(user.getFirst_name());
+        inpuntEditTextLastName.setText((user.getLast_name()));
+        inpuntEditTextEmail.setText(user.getEmail());
+        inpuntEditTextPassword.setText(user.getPassword());
+        inpuntEditTextLogin.setText(user.getLogin());
+        inputBio.setText(user.getBio() != null? user.getBio() : "Остутсвует");
+        form_spinnerRole.setSelection(user.getRole_id()-1);
+        //form_spinnerRole.set
+    }
+
+    private void setUserInfoById() {
+        int userId = arguments.getInt("userId");
+        final User[] foundedUser = {new User()};
+
+        RetrofitService retrofitService = new RetrofitService();
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+
+        UserRequest userRequest = new UserRequest();
+        userRequest.setId(userId);
+
+        userApi.getById(userRequest).enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User user = response.body().getUser();
+                    System.out.println(user);
+                    fillForm(user); // ← заполняем форму ПОСЛЕ получения данных
+                    Logger.getLogger(UserForm.class.getName()).log(Level.INFO,
+                            "User data loaded and form filled");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Toast.makeText(UserForm.this, "Failed to found user", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+
+        //return foundedUser[0];
     }
 
     private void loadRoles() {

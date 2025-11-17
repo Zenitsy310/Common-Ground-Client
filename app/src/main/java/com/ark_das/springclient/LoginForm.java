@@ -20,8 +20,8 @@ import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 
-import com.ark_das.springclient.adapter.LoginRequest;
-import com.ark_das.springclient.adapter.LoginResponse;
+import com.ark_das.springclient.dto.LoginRequest;
+import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.retrofit.RetrofitService;
 import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.textfield.TextInputEditText;
@@ -84,9 +84,6 @@ public class LoginForm extends AppCompatActivity implements Validator.Validation
 
         signUpLink = findViewById(R.id.signUpLink);
         signUpLink.setOnClickListener(view -> SignUpLink());
-
-
-
 
     }
 

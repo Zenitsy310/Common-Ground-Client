@@ -1,4 +1,4 @@
-package com.ark_das.springclient.adapter;
+package com.ark_das.springclient.dto;
 
 import com.ark_das.springclient.model.User;
 
