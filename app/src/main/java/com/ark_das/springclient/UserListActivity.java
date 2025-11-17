@@ -67,6 +67,7 @@ public class UserListActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.userList_fab);
         floatingActionButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, UserForm.class);
+            intent.putExtra("mode", "create");
             startActivity(intent);
         });
     }

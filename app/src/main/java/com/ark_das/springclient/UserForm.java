@@ -97,7 +97,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             if (arguments != null) {
                 userId = arguments.getInt("userId");
                 mode = arguments.getString("mode");
-
                 Logger.getLogger(UserForm.class.getName()).log(Level.INFO,
                         "Received arguments - userId: " + userId + ", mode: " + mode);
             }
@@ -149,7 +148,9 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         loadRoles();
         if(arguments.get("mode") != null && arguments.get("mode").equals("update")){
             setUserInfoById();
-        }
+        } /*else if (arguments.get("mode") != null && arguments.get("mode").equals("create")) {
+
+        }*/
 
     }
 
@@ -333,5 +334,13 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         layout_form_textFieldLogin.setError(null);
         layout_form_textFieldBio.setError(null);
         layout_form_spinnerRole.setError(null);
+    }
+
+    private void setupEditMode(){
+
+    }
+
+    private void setupCreautemode(){
+
     }
 }
