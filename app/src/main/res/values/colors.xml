@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!--<color name="mainGreen">#3e503c</color>-->
     <color name="mainGreen">#787049</color>
     <color name="mainBackGround">#d5d7bf</color>
     <color name="ultraLightPurple">#bbabb5</color>

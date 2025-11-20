@@ -271,18 +271,6 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/form_buttonCancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/button_cancel"
-                    android:textColor="@color/mainPurple"
-                    app:backgroundTint="@color/ultraLightPurple"
-                    app:strokeColor="@color/mainPurple"
-                    app:strokeWidth="1dp"
-                    style="@style/Widget.Material3.Button.OutlinedButton" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/form_buttonSave"
@@ -295,7 +283,36 @@
                     app:backgroundTint="@color/mainPurple"
                     style="@style/Widget.Material3.Button" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/form_buttonDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/button_delete_user"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/mainPurple"
+                    style="@style/Widget.Material3.Button" />
+
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/form_buttonCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/button_cancel"
+                    android:textColor="@color/mainPurple"
+                    app:backgroundTint="@color/ultraLightPurple"
+                    app:strokeColor="@color/mainPurple"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+        </LinearLayout>
 
         </LinearLayout>
 

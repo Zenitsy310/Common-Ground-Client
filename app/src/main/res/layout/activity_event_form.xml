@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_event_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground"
+    tools:context=".EventFormActivity">
+
+    <!-- AppBar Layout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/appbar_gradient_vertical"
+        android:elevation="8dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_event_white"
+                    android:tint="@color/white"
+                    android:layout_marginEnd="16dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Новое событие"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/source_sans_3_semi_bold" />
+
+                    <TextView
+                        android:id="@+id/toolbar_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Заполните все поля"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/source_sans_3_regular" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_menu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_more_vert_white"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/white" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ScrollView Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- СЕКЦИЯ 1: ОСНОВНАЯ ИНФОРМАЦИЯ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/ultraLightPurple"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Заголовок секции -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ОСНОВНАЯ ИНФОРМАЦИЯ"
+                        android:textColor="@color/mainGreen"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/source_sans_3_semi_bold" />
+
+                    <!-- Название события -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Название события"
+                        app:hintTextColor="@color/mainGreen"
+                        app:boxStrokeColor="@color/mainPurple"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconTint="@color/mainPurple"
+                        app:endIconMode="clear_text"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/mainGreen"
+                            android:textSize="16sp"
+                            android:maxLines="1"
+                            android:fontFamily="@font/source_sans_3_regular"
+                            android:padding="12dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Описание -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Подробное описание"
+                        app:hintTextColor="@color/mainGreen"
+                        app:boxStrokeColor="@color/mainPurple"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconTint="@color/mainPurple"
+                        app:endIconMode="clear_text"
+                        android:layout_marginBottom="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:textColor="@color/mainGreen"
+                            android:textSize="16sp"
+                            android:gravity="top"
+                            android:maxLines="5"
+                            android:inputType="textMultiLine"
+                            android:fontFamily="@font/source_sans_3_regular"
+                            android:padding="12dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- СЕКЦИЯ 2: МЕСТО И ВРЕМЯ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/ultraLightPurple"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Заголовок секции -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="МЕСТО И ВРЕМЯ"
+                        android:textColor="@color/mainGreen"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/source_sans_3_semi_bold" />
+
+                    <!-- Адрес -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Адрес"
+                        app:hintTextColor="@color/mainGreen"
+                        app:boxStrokeColor="@color/mainPurple"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconTint="@color/mainPurple"
+                        app:endIconMode="clear_text"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/mainGreen"
+                            android:textSize="16sp"
+                            android:maxLines="2"
+                            android:fontFamily="@font/source_sans_3_regular"
+                            android:padding="12dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Дата и время -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_datetime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Дата и время начала"
+                        app:hintTextColor="@color/mainGreen"
+                        app:boxStrokeColor="@color/mainPurple"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconTint="@color/mainPurple"
+                        android:layout_marginBottom="8dp">
+
+                        <!-- Поле даты-времени как кнопка -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@android:color/white"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <!-- Иконка календаря -->
+                            <TextView
+                                android:id="@+id/text_datetime"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="ДД.ММ.ГГГГ --:--"
+                                android:textColor="@color/mainGreen"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/source_sans_3_regular" />
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_calendar"
+                                app:tint="@color/mainPurple"
+                                android:contentDescription="@string/select_date_time" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- СЕКЦИЯ 3: КАТЕГОРИИ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/ultraLightPurple"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Заголовок секции -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="КАТЕГОРИИ"
+                        android:textColor="@color/mainGreen"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/source_sans_3_semi_bold" />
+
+                    <!-- Выбор тегов -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Выбор тегов (макс. 3)"
+                        app:hintTextColor="@color/mainGreen"
+                        app:boxStrokeColor="@color/mainPurple"
+                        app:boxStrokeWidth="2dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconTint="@color/mainPurple"
+                        android:background="@android:color/white"
+                        android:layout_marginBottom="8dp">
+
+                        <!-- Контейнер для выбранных тегов -->
+                        <LinearLayout
+                            android:id="@+id/tags_selector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:minHeight="48dp">
+
+                            <!-- Подсказка или выбранные теги -->
+                            <TextView
+                                android:id="@+id/tags_hint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Выберите теги"
+                                android:textColor="@color/mainGreen"
+                                android:background="@android:color/transparent"
+                                android:alpha="0.7"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/source_sans_3_regular" />
+
+                            <!-- Контейнер для выбранных тегов -->
+                            <LinearLayout
+                                android:id="@+id/selected_tags_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:background="@android:color/transparent"
+                                android:layout_marginTop="8dp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Выпадающий список тегов -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@drawable/tags_dropdown_background"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- КНОПКИ ДЕЙСТВИЙ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <!-- Режим создания -->
+                <LinearLayout
+                    android:id="@+id/create_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Основная кнопка с градиентом -->
+                    <Button
+                        android:id="@+id/btn_create"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="СОЗДАТЬ"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/source_sans_3_semi_bold"
+                        android:letterSpacing="0.03"
+                        android:background="@drawable/ripple_gradient_primary"
+                        android:stateListAnimator="@null"
+                        style="@style/Widget.Material3.Button" />
+
+                    <!-- Вторичная кнопка с обводкой -->
+                    <Button
+                        android:id="@+id/btn_cancel_create"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="ОТМЕНИТЬ"
+                        android:textColor="@color/mainPurple"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/source_sans_3_medium"
+                        android:letterSpacing="0.03"
+                        android:background="@drawable/ripple_gradient_secondary"
+                        android:stateListAnimator="@null"
+                        style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                </LinearLayout>
+
+                <!-- Кнопка удаления с градиентом ошибки -->
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="УДАЛИТЬ СОБЫТИЕ"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/source_sans_3_medium"
+                    android:letterSpacing="0.02"
+                    android:background="@drawable/ripple_gradient_error"
+                    android:stateListAnimator="@null"
+                    style="@style/Widget.Material3.Button" />
+
+            </LinearLayout>
+
+                <!-- Режим редактирования -->
+                <LinearLayout
+                    android:id="@+id/edit_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_marginBottom="8dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_save"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:text="СОХРАНИТЬ"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/source_sans_3_semi_bold"
+                            app:backgroundTint="@color/mainPurple"
+                            style="@style/Widget.Material3.Button" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_cancel_edit"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="ОТМЕНИТЬ"
+                            android:textColor="@color/mainPurple"
+                            android:fontFamily="@font/source_sans_3_medium"
+                            app:backgroundTint="@color/ultraLightPurple"
+                            app:strokeColor="@color/mainPurple"
+                            app:strokeWidth="1dp"
+                            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_delete_sec"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="УДАЛИТЬ"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/source_sans_3_semi_bold"
+                        app:backgroundTint="@android:color/holo_red_dark"
+                        style="@style/Widget.Material3.Button" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

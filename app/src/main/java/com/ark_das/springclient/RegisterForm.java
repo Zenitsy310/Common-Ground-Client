@@ -149,7 +149,7 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
                             startActivity(intent);
                         }else{
                             Toast.makeText(RegisterForm.this,
-                                    response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    response.body().getMessage() != null? response.body().getMessage() : "Server error", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

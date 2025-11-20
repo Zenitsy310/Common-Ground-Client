@@ -16,8 +16,10 @@
     <string name="form_email">Email</string>
     <string name="form_login">Login</string>
     <string name="form_password_hash">Password</string>
-
+    <!-- Strings for button-->
     <string name="button_save_user">Save user</string>
+    <string name="button_edit_user">Edit user</string>
+    <string name="button_delete_user">Delete user</string>
     <!-- Users atributs -->
     <string name="id">id</string>
     <string name="fist_name">First name</string>
@@ -53,8 +55,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <!--Заголовки страниц -->
+    <string name="event_form_title">Создание события</string>
 
-
-
+    <!--Activity_event_form -->
+    <string name="select_date_time">Выбрать дату и время</string>
 
 </resources>

@@ -130,6 +130,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
         MaterialButton buttonSave = findViewById(R.id.form_buttonSave);
         MaterialButton buttonCancel = findViewById(R.id.form_buttonCancel);
+        MaterialButton buttonDelete = findViewById(R.id.form_buttonDelete);
 
         // Запуск валидации по клику
         buttonSave.setOnClickListener(view -> {
@@ -141,16 +142,18 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             startActivity(intent);
         });
 
+        buttonDelete.setOnClickListener(view -> {
+
+        });
+
         // Инициализация списка ролей
         roles = new ArrayList<>();
 
         // Загрузка ролей с сервера
         loadRoles();
         if(arguments.get("mode") != null && arguments.get("mode").equals("update")){
-            setUserInfoById();
-        } /*else if (arguments.get("mode") != null && arguments.get("mode").equals("create")) {
-
-        }*/
+            setupEditMode();
+        }
 
     }
 
@@ -162,12 +165,12 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         inpuntEditTextLogin.setText(user.getLogin());
         inputBio.setText(user.getBio() != null? user.getBio() : "Остутсвует");
         form_spinnerRole.setSelection(user.getRole_id()-1);
-        //form_spinnerRole.set
+
     }
 
     private void setUserInfoById() {
         int userId = arguments.getInt("userId");
-        final User[] foundedUser = {new User()};
+        //final User[] foundedUser = {new User()};
 
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
@@ -194,7 +197,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             }
         });
 
-        //return foundedUser[0];
+
     }
 
     private void loadRoles() {
@@ -336,8 +339,12 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         layout_form_spinnerRole.setError(null);
     }
 
-    private void setupEditMode(){
+    public void userDelete(){
 
+    }
+
+    private void setupEditMode(){
+        setUserInfoById();
     }
 
     private void setupCreautemode(){
