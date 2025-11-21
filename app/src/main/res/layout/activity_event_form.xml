@@ -48,7 +48,7 @@
                         android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Новое событие"
+                        android:text="@string/new_event"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:fontFamily="@font/source_sans_3_semi_bold" />
@@ -57,7 +57,7 @@
                         android:id="@+id/toolbar_subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Заполните все поля"
+                        android:text="@string/fill_all_fields"
                         android:textColor="#CCFFFFFF"
                         android:textSize="14sp"
                         android:fontFamily="@font/source_sans_3_regular" />
@@ -66,8 +66,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_menu"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/ic_more_vert_white"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="@color/white" />
@@ -109,20 +109,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ОСНОВНАЯ ИНФОРМАЦИЯ"
+                        android:text="@string/main_info"
                         android:textColor="@color/mainGreen"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/source_sans_3_semi_bold" />
+                        android:fontFamily="@font/source_sans_3_semi_bold"/>
 
                     <!-- Название события -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/layout_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Название события"
+                        android:hint="@string/event_name"
                         app:hintTextColor="@color/mainGreen"
                         app:boxStrokeColor="@color/mainPurple"
                         app:boxStrokeWidth="2dp"
@@ -148,7 +148,7 @@
                         android:id="@+id/layout_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Подробное описание"
+                        android:hint="@string/event_description"
                         app:hintTextColor="@color/mainGreen"
                         app:boxStrokeColor="@color/mainPurple"
                         app:boxStrokeWidth="2dp"
@@ -194,7 +194,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="МЕСТО И ВРЕМЯ"
+                        android:text="@string/place_and_time"
                         android:textColor="@color/mainGreen"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -207,7 +207,7 @@
                         android:id="@+id/layout_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Адрес"
+                        android:hint="@string/adress"
                         app:hintTextColor="@color/mainGreen"
                         app:boxStrokeColor="@color/mainPurple"
                         app:boxStrokeWidth="2dp"
@@ -258,7 +258,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="ДД.ММ.ГГГГ --:--"
+                                android:text="@string/date_and_time"
                                 android:textColor="@color/mainGreen"
                                 android:textSize="16sp"
                                 android:fontFamily="@font/source_sans_3_regular" />
@@ -297,7 +297,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="КАТЕГОРИИ"
+                        android:text="@string/categories"
                         android:textColor="@color/mainGreen"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -335,7 +335,7 @@
                                 android:id="@+id/tags_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Выберите теги"
+                                android:text="@string/choose_tags"
                                 android:textColor="@color/mainGreen"
                                 android:background="@android:color/transparent"
                                 android:alpha="0.7"
@@ -391,7 +391,7 @@
                         android:layout_height="48dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:text="СОЗДАТЬ"
+                        android:text="@string/btn_create"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_semi_bold"
@@ -407,7 +407,7 @@
                         android:layout_height="48dp"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
-                        android:text="ОТМЕНИТЬ"
+                        android:text="@string/btn_cancel"
                         android:textColor="@color/mainPurple"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_medium"
@@ -423,7 +423,7 @@
                     android:id="@+id/btn_delete"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:text="УДАЛИТЬ СОБЫТИЕ"
+                    android:text="@string/btn_delete_event"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:fontFamily="@font/source_sans_3_medium"

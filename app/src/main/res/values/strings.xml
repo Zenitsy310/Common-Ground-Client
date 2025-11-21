@@ -2,63 +2,75 @@
     <!-- App name -->
     <string name="app_name">Common Ground</string>
 
-    <string name="form_title">Users list</string>
-    <string name="avatar_description">Avatar description</string>
-    <string name="change_avatar">Change avatar</string>
-    <string name="form_password">password</string>
-    <string name="form_bio">Bio</string>
-    <string name="form_role">Role</string>
-    <string name="button_cancel">Cancel</string>
+    <string name="form_title">Список пользователей</string>
+    <string name="avatar_description">Описание аватара</string>
+    <string name="change_avatar">Сменить аватар</string>
+    <string name="form_password">пароль</string>
+    <string name="form_bio">Биография</string>
+    <string name="form_role">Роль</string>
+    <string name="button_cancel">Отмена</string>
 
-    <string name="form_name">Authtorization</string>
-    <string name="form_first_name">First name</string>
-    <string name="form_last_name">Last name</string>
+    <string name="form_name">Авторизация</string>
+    <string name="form_first_name">Имя</string>
+    <string name="form_last_name">Фамилия</string>
     <string name="form_email">Email</string>
-    <string name="form_login">Login</string>
-    <string name="form_password_hash">Password</string>
+    <string name="form_login">Логин</string>
+    <string name="form_password_hash">Пароль</string>
     <!-- Strings for button-->
-    <string name="button_save_user">Save user</string>
-    <string name="button_edit_user">Edit user</string>
-    <string name="button_delete_user">Delete user</string>
+    <string name="button_save_user">Сохранить пользователя</string>
+    <string name="button_edit_user">Редактировать пользователя</string>
+    <string name="button_delete_user">Удалить пользователя</string>
     <!-- Users atributs -->
-    <string name="id">id</string>
-    <string name="fist_name">First name</string>
-    <string name="last_name">Last name</string>
+    <string name="id">ID</string>
+    <string name="fist_name">Имя</string>
+    <string name="last_name">Фамилия</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="password">Пароль</string>
+    <string name="login">Логин</string>
 
-    <string name="role">Role</string>
-    <string name="login_back">Welcome back! Please login to continue</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="sign_up">Sign up</string>
-    <string name="Dont_have_an_account">Dont have an account?</string>
+    <string name="role">Роль</string>
+    <string name="login_back">С возвращением! Пожалуйста, войдите чтобы продолжить</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="Dont_have_an_account">Нет аккаунта?</string>
     <!--Strings for list_user_items -->
-    <string name="list_user_item_login">User login</string>
-    <string name="list_user_item_created_at">User was created at</string>
-    <string name="list_user_item_email">User email</string>
+    <string name="list_user_item_login">Логин пользователя</string>
+    <string name="list_user_item_created_at">Пользователь создан</string>
+    <string name="list_user_item_email">Email пользователя</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="no_users_found">No users found</string>
-    <string name="user_avatar">User avatar</string>
-    <string name="more_actions">More actions</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="second_fragment_label">Второй фрагмент</string>
+    <string name="next">Далее</string>
+    <string name="previous">Назад</string>
+    <string name="no_users_found">Пользователи не найдены</string>
+    <string name="user_avatar">Аватар пользователя</string>
+    <string name="more_actions">Дополнительные действия</string>
+    <string name="title_activity_login">Авторизация</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти или зарегистрироваться</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="invalid_username">Некорректное имя пользователя</string>
+    <string name="invalid_password">Пароль должен содержать более 5 символов</string>
+    <string name="login_failed">Ошибка входа</string>
     <!--Заголовки страниц -->
     <string name="event_form_title">Создание события</string>
 
     <!--Activity_event_form -->
     <string name="select_date_time">Выбрать дату и время</string>
+    <string name="new_event">Новое событие</string>
+    <string name="fill_all_fields">Заполните все поля</string>
+    <string name="main_info">ОСНОВНАЯ ИНФОРМАЦИЯ</string>
+    <string name="event_name">Название события</string>
+    <string name="event_description">Подробное описание</string>
+    <string name="place_and_time">МЕСТО И ВРЕМЯ</string>
+    <string name="adress">Адрес</string>
+    <string name="date_and_time">ДД.ММ.ГГГГ --:--</string>
+    <string name="categories">КАТЕГОРИИ</string>
+    <string name="choose_tags">Выберите теги</string>
+    <string name="btn_create">СОЗДАТЬ</string>
+    <string name="btn_cancel">ОТМЕНИТЬ</string>
+    <string name="btn_delete_event">УДАЛИТЬ СОБЫТИЕ</string>
 
 </resources>
