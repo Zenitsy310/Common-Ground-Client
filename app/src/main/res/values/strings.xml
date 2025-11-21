@@ -3,6 +3,7 @@
     <string name="app_name">Common Ground</string>
 
     <string name="form_title">Список пользователей</string>
+    <string name="form_title_add_user">Редактирование пользователя</string>
     <string name="avatar_description">Описание аватара</string>
     <string name="change_avatar">Сменить аватар</string>
     <string name="form_password">пароль</string>

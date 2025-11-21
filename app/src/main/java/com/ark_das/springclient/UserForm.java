@@ -41,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
-    //private User userId;
+
     private Bundle arguments;
     private int userId;
     private String mode;
@@ -80,6 +80,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
     private List<Role> roles;
     private Validator validator;
     private int selectedRoleId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,19 +132,26 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         MaterialButton buttonSave = findViewById(R.id.form_buttonSave);
         MaterialButton buttonCancel = findViewById(R.id.form_buttonCancel);
         MaterialButton buttonDelete = findViewById(R.id.form_buttonDelete);
+        MaterialButton buttonMenu = findViewById(R.id.btn_menu);
 
         // Запуск валидации по клику
         buttonSave.setOnClickListener(view -> {
+
             validator.validate();
+
         });
 
         buttonCancel.setOnClickListener(view -> {
-            Intent intent = new Intent(UserForm.this, UserListActivity.class);
-            startActivity(intent);
+            putBack();
         });
 
         buttonDelete.setOnClickListener(view -> {
 
+            deleteUser();
+        });
+
+        buttonMenu.setOnClickListener(view -> {
+            putBack();
         });
 
         // Инициализация списка ролей
@@ -151,7 +159,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
         // Загрузка ролей с сервера
         loadRoles();
-        if(arguments.get("mode") != null && arguments.get("mode").equals("update")){
+        if (arguments.get("mode") != null && arguments.get("mode").equals("update")) {
             setupEditMode();
         }
 
@@ -163,14 +171,14 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         inpuntEditTextEmail.setText(user.getEmail());
         inpuntEditTextPassword.setText(user.getPassword());
         inpuntEditTextLogin.setText(user.getLogin());
-        inputBio.setText(user.getBio() != null? user.getBio() : "Остутсвует");
-        form_spinnerRole.setSelection(user.getRole_id()-1);
+        inputBio.setText(user.getBio() != null ? user.getBio() : "Остутсвует");
+        form_spinnerRole.setSelection(user.getRole_id() - 1);
 
     }
 
     private void setUserInfoById() {
         int userId = arguments.getInt("userId");
-        //final User[] foundedUser = {new User()};
+
 
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
@@ -261,9 +269,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
     public void onValidationSucceeded() {
         clearAllErrors();
 
-        RetrofitService retrofitService = new RetrofitService();
-        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
-
         String first_name = inpuntEditTextFirstName.getText().toString().trim();
         String last_name = inpuntEditTextLastName.getText().toString().trim();
         String email = inpuntEditTextEmail.getText().toString().trim();
@@ -280,23 +285,8 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         user.setBio(bio);
         user.setRole_id(selectedRoleId); // устанавливаем выбранную роль
 
-        userApi.register(user)
-                .enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if(response.isSuccessful() && response.body().isSuccess()){
-                            Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(UserForm.this,
-                                    response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Toast.makeText(UserForm.this, "Server eror", Toast.LENGTH_SHORT).show();
-                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
-                    }
-                });
+        registerUser(user);
+        clearFields();
     }
 
     @Override
@@ -329,6 +319,15 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         }
     }
 
+    private void clearFields(){
+        inpuntEditTextFirstName.setText("");
+        inpuntEditTextLastName.setText("");
+        inpuntEditTextEmail.setText("");
+        inpuntEditTextPassword.setText("");
+        inpuntEditTextLogin.setText("");
+        inputBio.setText("");
+        form_spinnerRole.setSelection(1);
+    }
     private void clearAllErrors() {
         layout_form_textFieldFirstName.setError(null);
         layout_form_textFieldLastName.setError(null);
@@ -339,15 +338,47 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         layout_form_spinnerRole.setError(null);
     }
 
-    public void userDelete(){
+    private void clearForm(){
+        clearAllErrors();
+        clearFields();
+    }
 
+    public void deleteUser(){
+        //действия удаления
     }
 
     private void setupEditMode(){
         setUserInfoById();
     }
 
-    private void setupCreautemode(){
+    private void setupCreateMode(){
 
+    }
+    private void registerUser(User user){
+        RetrofitService retrofitService = new RetrofitService();
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+        userApi.register(user)
+                .enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if(response.isSuccessful() && response.body().isSuccess()){
+                            Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            clearForm();
+                        }else{
+                            Toast.makeText(UserForm.this,
+                                    response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Toast.makeText(UserForm.this, "Server eror", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
+                    }
+                });
+    }
+
+    private void putBack() {
+        Intent intent = new Intent(UserForm.this, UserListActivity.class);
+        startActivity(intent);
     }
 }
