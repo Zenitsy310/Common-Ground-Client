@@ -7,21 +7,73 @@
     android:layout_height="match_parent"
     android:background="@color/mainBackground"
     tools:context=".UserForm">
-
+    <!-- AppBar Layout -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/mainGreen"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="80dp"
+        android:background="@drawable/appbar_gradient_vertical"
+        android:elevation="8dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/mainGreen"
-            app:title="@string/form_title"
-            app:titleTextColor="@color/white"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_person"
+                    android:tint="@color/white"
+                    android:layout_marginEnd="16dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/form_title_add_user"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/source_sans_3_semi_bold" />
+
+                    <TextView
+                        android:id="@+id/toolbar_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fill_all_fields"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/source_sans_3_regular" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_menu"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/ic_more_vert_white"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/white" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -271,18 +323,6 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/form_buttonCancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/button_cancel"
-                    android:textColor="@color/mainPurple"
-                    app:backgroundTint="@color/ultraLightPurple"
-                    app:strokeColor="@color/mainPurple"
-                    app:strokeWidth="1dp"
-                    style="@style/Widget.Material3.Button.OutlinedButton" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/form_buttonSave"
@@ -295,7 +335,36 @@
                     app:backgroundTint="@color/mainPurple"
                     style="@style/Widget.Material3.Button" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/form_buttonDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/button_delete_user"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/mainGreen"
+                    style="@style/Widget.Material3.Button" />
+
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/form_buttonCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/button_cancel"
+                    android:textColor="@color/mainPurple"
+                    app:backgroundTint="@color/ultraLightPurple"
+                    app:strokeColor="@color/mainPurple"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+        </LinearLayout>
 
         </LinearLayout>
 
