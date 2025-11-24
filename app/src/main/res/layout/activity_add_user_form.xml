@@ -343,7 +343,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/button_delete_user"
                     android:textColor="@color/white"
-                    app:backgroundTint="@color/mainPurple"
+                    app:backgroundTint="@color/mainGreen"
                     style="@style/Widget.Material3.Button" />
 
             </LinearLayout>

@@ -8,8 +8,10 @@ import com.ark_das.springclient.model.User;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UserApi {
 
@@ -17,7 +19,7 @@ public interface UserApi {
     Call<List<User>> getAllUsers();
 
     @POST("/user/save")
-    Call<User> save(@Body User user);
+    Call<UserResponse> save(@Body User user);
 
     @POST("/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
@@ -28,5 +30,7 @@ public interface UserApi {
     @POST("/user/get-by-id")
     Call<UserResponse> getById(@Body UserRequest userRequest);
 
+    @DELETE("/user/{id}")
+    Call<UserResponse> deleteById(@Path("id")int userId);
 
 }
