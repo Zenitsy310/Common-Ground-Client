@@ -1,4 +1,4 @@
-package com.ark_das.springclient;
+package com.ark_das.springclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.ark_das.springclient.R;
 import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.dto.UserRequest;
 import com.ark_das.springclient.dto.UserResponse;
@@ -40,7 +41,6 @@ import java.util.logging.Logger;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
 
