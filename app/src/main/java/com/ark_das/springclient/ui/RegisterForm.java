@@ -1,4 +1,4 @@
-package com.ark_das.springclient;
+package com.ark_das.springclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.ark_das.springclient.R;
 import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;

@@ -17,10 +17,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterForm"
+            android:name=".ui.RegisterForm"
             android:exported="true" />
         <activity
-            android:name=".LoginForm"
+            android:name=".ui.LoginForm"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.EventFormActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.UserListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,18 +36,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventFormActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".UserListActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".UserForm"
+            android:name=".ui.UserForm"
             android:exported="true"
             android:label="Create new user"
-            android:parentActivityName=".UserListActivity" />
+            android:parentActivityName=".ui.UserListActivity" />
     </application>
 
 </manifest>

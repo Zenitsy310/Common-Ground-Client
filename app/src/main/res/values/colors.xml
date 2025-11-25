@@ -2,11 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mainGreen">#787049</color>
+    <color name="mainGreen" >#787049</color>
     <color name="mainBackGround">#d5d7bf</color>
     <color name="ultraLightPurple">#bbabb5</color>
     <color name="lightPurple">#998199</color>
     <color name="mainPurple">#6f5c89</color>
     <color name="mainBackground">#d5d7bf</color>
     <color name="red">#E91E63</color>
+    <color name="gray_inactive">#757575</color>
+
 </resources>

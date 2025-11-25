@@ -10,6 +10,7 @@
     <string name="form_bio">Биография</string>
     <string name="form_role">Роль</string>
     <string name="button_cancel">Отмена</string>
+    <string name="all_real_users">Все существующие пользователи</string>
 
     <string name="form_name">Авторизация</string>
     <string name="form_first_name">Имя</string>
@@ -73,5 +74,9 @@
     <string name="btn_create">СОЗДАТЬ</string>
     <string name="btn_cancel">ОТМЕНИТЬ</string>
     <string name="btn_delete_event">УДАЛИТЬ СОБЫТИЕ</string>
+    <string name="add_user_fab">Создать</string>
+    <string name="icon_user">Аватар</string>
 
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <string name="action_settings">Настройки</string>
 </resources>

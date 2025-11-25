@@ -1,20 +1,15 @@
 package com.ark_das.springclient.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ark_das.springclient.LoginForm;
 import com.ark_das.springclient.R;
-import com.ark_das.springclient.UserForm;
-import com.ark_das.springclient.UserListActivity;
+import com.ark_das.springclient.ui.UserForm;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
