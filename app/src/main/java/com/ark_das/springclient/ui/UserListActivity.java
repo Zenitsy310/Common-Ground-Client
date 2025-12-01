@@ -3,7 +3,6 @@ package com.ark_das.springclient.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,9 +42,9 @@ public class UserListActivity extends AppCompatActivity {
     private UserAdapter userAdapter;
     private TextView emptyState;
     private ProgressBar progressBar;
-    private ImageButton btn_users, btn_events, btn_chats, btn_profile, btn_settings;
     private boolean rolesLoaded = false;
     private boolean usersLoaded = false;
+    BottomMenuView bottomMenuView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,6 @@ public class UserListActivity extends AppCompatActivity {
 
         initializeViews();
         setupBackPressedCallback();
-        setupBottomNavigation();
 
 
 
@@ -76,40 +74,11 @@ public class UserListActivity extends AppCompatActivity {
         loadUsers();
     }
 
-    private void setupBottomNavigation() {
-        ImageButton[] buttons = {btn_users, btn_events, btn_chats, btn_profile, btn_settings};
-
-        btn_users.setOnClickListener(v -> {
-            setActive(buttons, btn_users);
-            startActivity(new Intent(UserListActivity.this, UserListActivity.class));});
-        btn_events.setOnClickListener(v -> {
-            setActive(buttons, btn_events);
-            startActivity(new Intent(UserListActivity.this, EventListActivity.class));});
-        btn_chats.setOnClickListener(v -> setActive(buttons, btn_chats));
-        btn_profile.setOnClickListener(v -> setActive(buttons, btn_profile));
-        btn_settings.setOnClickListener(v -> setActive(buttons, btn_settings));
-
-        // Значение по умолчанию
-        setActive(buttons, btn_users);
-    }
-    private void setActive(ImageButton[] all, ImageButton selected) {
-        for (ImageButton b : all) {
-            b.setSelected(false);
-        }
-        selected.setSelected(true);
-    }
-
-
     private void initializeViews() {
         recyclerView = findViewById(R.id.userList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyState = findViewById(R.id.emptyState_textView);
         progressBar = findViewById(R.id.progressBar);
-        btn_users = findViewById(R.id.nav_users);
-        btn_events = findViewById(R.id.nav_events);
-        btn_chats = findViewById(R.id.nav_chats);
-        btn_profile = findViewById(R.id.nav_profile);
-        btn_settings = findViewById(R.id.nav_settings);
 
 
         emptyState.setVisibility(View.GONE);
@@ -120,39 +89,21 @@ public class UserListActivity extends AppCompatActivity {
             intent.putExtra("mode", "create");
             startActivity(intent);
         });
-    }
 
-    /*private void setupBottomNavigation() {
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-
-            switch (itemId) {
-                case R.id.nav_home:
-                    // Уже на главной
-                    return true;
-
-                case R.id.nav_events:
-                    // startActivity(new Intent(UserListActivity.this, EventsActivity.class));
-                    return true;
-
-                case R.id.nav_create:
-                    // startActivity(new Intent(UserListActivity.this, CreateEventActivity.class));
-                    return true;
-
-                case R.id.nav_chats:
-                    // startActivity(new Intent(UserListActivity.this, ChatsActivity.class));
-                    return true;
-
-                case R.id.nav_profile:
-                    // startActivity(new Intent(UserListActivity.this, ProfileActivity.class));
-                    return true;
-
-                default:
-                    return false;
+        bottomMenuView = findViewById(R.id.bottomMenuView);
+        bottomMenuView.setActive(R.id.nav_user);
+        bottomMenuView.setOnItemSelectedListener(id -> {
+            if (id == R.id.nav_event) {
+                startActivity(new Intent(this, EventListActivity.class));
+            } else if (id == R.id.nav_chat) {
+                startActivity(new Intent(this, EventListActivity.class));
+            } else if (id == R.id.nav_profile) {
+                startActivity(new Intent(this, EventListActivity.class));
+            } else if (id == R.id.nav_settings) {
+                startActivity(new Intent(this, EventListActivity.class));
             }
         });
-    }*/
-
+    }
     private void setupBackPressedCallback() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override

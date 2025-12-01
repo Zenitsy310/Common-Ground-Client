@@ -8,7 +8,10 @@
         <item name="colorSecondaryVariant">@color/mainPurple</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor">@color/mainGreen</item>
-        <item name="android:windowBackground">@color/mainBackground</item>    </style>
+        <item name="android:windowBackground">@color/mainBackground</item>
+    </style>
 
     <style name="Theme.CommonGround" parent="Base.Theme.CommonGround" />
+
+
 </resources>

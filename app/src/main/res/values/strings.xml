@@ -64,7 +64,6 @@
     <string name="new_event">Новое событие</string>
     <string name="fill_all_fields">Заполните все поля</string>
     <string name="main_info">ОСНОВНАЯ ИНФОРМАЦИЯ</string>
-    <string name="event_name">Название события</string>
     <string name="event_description">Подробное описание</string>
     <string name="place_and_time">МЕСТО И ВРЕМЯ</string>
     <string name="adress">Адрес</string>
@@ -79,4 +78,15 @@
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
     <string name="action_settings">Настройки</string>
+
+    <string name="events_list">Список мероприятий</string>
+    <string name="all_current_events">Все текущие события</string>
+    <string name="no_events_found">Мероприятия не найдены</string>
+
+    <string name="tag">Тэг</string>
+    <string name="event_name">Название мероприятия</string>
+    <string name="event_create_by">Создано</string>
+    <string name="title_activity_test">test</string>
+    <string name="icon_event">Список событий</string>
+    <string name="add_event_fab">Создать мероприятие</string>
 </resources>
