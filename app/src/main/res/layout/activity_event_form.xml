@@ -90,7 +90,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- СЕКЦИЯ 1: ОСНОВНАЯ ИНФОРМАЦИЯ -->
+            <!-- СЕКЦИЯ 1 -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +105,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Заголовок секции -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -117,7 +116,7 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/source_sans_3_semi_bold"/>
 
-                    <!-- Название события -->
+                    <!-- Название -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/layout_title"
                         android:layout_width="match_parent"
@@ -175,14 +174,14 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- СЕКЦИЯ 2: МЕСТО И ВРЕМЯ -->
+            <!-- СЕКЦИЯ 2 (ИСПРАВЛЕНА) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/ultraLightPurple"
-                android:layout_marginBottom="20dp">
+                app:cardBackgroundColor="@color/ultraLightPurple">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,7 +189,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Заголовок секции -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -224,55 +222,80 @@
                             android:textSize="16sp"
                             android:maxLines="2"
                             android:fontFamily="@font/source_sans_3_regular"
-                            android:padding="12dp" />
+                            android:padding="12dp"
+                            android:letterSpacing="0.03"
+                            android:stateListAnimator="@null"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Дата и время -->
+                    <!-- Итоговая дата + время -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/layout_datetime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Дата и время начала"
+                        android:hint="@string/date_and_time"
                         app:hintTextColor="@color/mainGreen"
                         app:boxStrokeColor="@color/mainPurple"
                         app:boxStrokeWidth="2dp"
                         app:boxStrokeWidthFocused="2dp"
-                        app:endIconTint="@color/mainPurple"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="16dp">
 
-                        <!-- Поле даты-времени как кнопка -->
-                        <LinearLayout
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_datetime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="@android:color/white"
-                            android:padding="10dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <!-- Иконка календаря -->
-                            <TextView
-                                android:id="@+id/text_datetime"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/date_and_time"
-                                android:textColor="@color/mainGreen"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/source_sans_3_regular" />
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/ic_calendar"
-                                app:tint="@color/mainPurple"
-                                android:contentDescription="@string/select_date_time" />
-
-                        </LinearLayout>
+                            android:enabled="false"
+                            android:textColor="@color/mainGreen"
+                            android:textSize="16sp"
+                            android:padding="12dp"
+                            android:fontFamily="@font/source_sans_3_regular" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Кнопки -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:weightSum="2">
+
+                        <!-- Кнопка календаря -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_pick_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/date"
+                            android:onClick="setDate"
+                            android:icon="@drawable/ic_calendar"
+                            android:iconTint="@color/mainGreen"
+                            android:textColor="@color/mainGreen"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/source_sans_3_regular"
+                            android:layout_marginEnd="8dp"
+                            android:letterSpacing="0.03"
+                            android:stateListAnimator="@null"/>
+
+
+                        <!-- Кнопка времени -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_pick_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/time"
+                            android:onClick="setTime"
+                            android:icon="@drawable/ic_time"
+                            android:iconTint="@color/mainGreen"
+                            android:textColor="@color/mainGreen"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/source_sans_3_regular"
+                            android:layout_marginStart="8dp"
+                            android:letterSpacing="0.03"
+                            android:stateListAnimator="@null"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -293,7 +316,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Заголовок секции -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -305,7 +327,6 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/source_sans_3_semi_bold" />
 
-                    <!-- Выбор тегов -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/layout_tags"
                         android:layout_width="match_parent"
@@ -319,7 +340,6 @@
                         android:background="@android:color/white"
                         android:layout_marginBottom="8dp">
 
-                        <!-- Контейнер для выбранных тегов -->
                         <LinearLayout
                             android:id="@+id/tags_selector"
                             android:layout_width="match_parent"
@@ -328,34 +348,29 @@
                             android:padding="10dp"
                             android:clickable="true"
                             android:focusable="true"
-                            android:minHeight="48dp">
+                            android:minHeight="40dp">
 
-                            <!-- Подсказка или выбранные теги -->
                             <TextView
                                 android:id="@+id/tags_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/choose_tags"
                                 android:textColor="@color/mainGreen"
-                                android:background="@android:color/transparent"
                                 android:alpha="0.7"
                                 android:textSize="16sp"
                                 android:fontFamily="@font/source_sans_3_regular" />
 
-                            <!-- Контейнер для выбранных тегов -->
                             <LinearLayout
                                 android:id="@+id/selected_tags_container"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:background="@android:color/transparent"
                                 android:layout_marginTop="8dp" />
 
                         </LinearLayout>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Выпадающий список тегов -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_tags"
                         android:layout_width="match_parent"
@@ -367,7 +382,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- КНОПКИ ДЕЙСТВИЙ -->
+            <!-- КНОПКИ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -375,7 +390,6 @@
                 android:gravity="center"
                 android:padding="16dp">
 
-                <!-- Режим создания -->
                 <LinearLayout
                     android:id="@+id/create_buttons"
                     android:layout_width="match_parent"
@@ -384,7 +398,6 @@
                     android:weightSum="2"
                     android:layout_marginBottom="16dp">
 
-                    <!-- Основная кнопка с градиентом -->
                     <Button
                         android:id="@+id/btn_create"
                         android:layout_width="0dp"
@@ -397,10 +410,8 @@
                         android:fontFamily="@font/source_sans_3_semi_bold"
                         android:letterSpacing="0.03"
                         android:background="@drawable/ripple_gradient_primary"
-                        android:stateListAnimator="@null"
-                        style="@style/Widget.Material3.Button" />
+                        android:stateListAnimator="@null" />
 
-                    <!-- Вторичная кнопка с обводкой -->
                     <Button
                         android:id="@+id/btn_cancel_create"
                         android:layout_width="0dp"
@@ -408,17 +419,15 @@
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
                         android:text="@string/btn_cancel"
-                        android:textColor="@color/mainPurple"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_medium"
                         android:letterSpacing="0.03"
                         android:background="@drawable/ripple_gradient_secondary"
-                        android:stateListAnimator="@null"
-                        style="@style/Widget.Material3.Button.OutlinedButton" />
+                        android:stateListAnimator="@null" />
 
                 </LinearLayout>
 
-                <!-- Кнопка удаления с градиентом ошибки -->
                 <Button
                     android:id="@+id/btn_delete"
                     android:layout_width="match_parent"
@@ -429,18 +438,15 @@
                     android:fontFamily="@font/source_sans_3_medium"
                     android:letterSpacing="0.02"
                     android:background="@drawable/ripple_gradient_error"
-                    android:stateListAnimator="@null"
-                    style="@style/Widget.Material3.Button" />
+                    android:stateListAnimator="@null" />
 
-            </LinearLayout>
-
-                <!-- Режим редактирования -->
                 <LinearLayout
                     android:id="@+id/edit_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -458,8 +464,7 @@
                             android:text="СОХРАНИТЬ"
                             android:textColor="@color/white"
                             android:fontFamily="@font/source_sans_3_semi_bold"
-                            app:backgroundTint="@color/mainPurple"
-                            style="@style/Widget.Material3.Button" />
+                            app:backgroundTint="@color/mainPurple" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_cancel_edit"
@@ -472,8 +477,7 @@
                             android:fontFamily="@font/source_sans_3_medium"
                             app:backgroundTint="@color/ultraLightPurple"
                             app:strokeColor="@color/mainPurple"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.Material3.Button.OutlinedButton" />
+                            app:strokeWidth="1dp" />
 
                     </LinearLayout>
 
@@ -484,10 +488,9 @@
                         android:text="УДАЛИТЬ"
                         android:textColor="@color/white"
                         android:fontFamily="@font/source_sans_3_semi_bold"
-                        app:backgroundTint="@android:color/holo_red_dark"
-                        style="@style/Widget.Material3.Button" />
+                        app:backgroundTint="@android:color/holo_red_dark" />
 
-
+                </LinearLayout>
 
             </LinearLayout>
 

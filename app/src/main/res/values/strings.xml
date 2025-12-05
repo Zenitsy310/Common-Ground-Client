@@ -67,7 +67,8 @@
     <string name="event_description">Подробное описание</string>
     <string name="place_and_time">МЕСТО И ВРЕМЯ</string>
     <string name="adress">Адрес</string>
-    <string name="date_and_time">ДД.ММ.ГГГГ --:--</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
     <string name="categories">КАТЕГОРИИ</string>
     <string name="choose_tags">Выберите теги</string>
     <string name="btn_create">СОЗДАТЬ</string>
@@ -89,4 +90,5 @@
     <string name="title_activity_test">test</string>
     <string name="icon_event">Список событий</string>
     <string name="add_event_fab">Создать мероприятие</string>
+    <string name="date_and_time">Дата и время\n</string>
 </resources>
