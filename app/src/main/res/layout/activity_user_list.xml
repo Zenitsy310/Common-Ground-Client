@@ -64,7 +64,7 @@
                         android:text="@string/all_real_users"
                         android:textColor="#CCFFFFFF"
                         android:textSize="14sp"
-                        android:fontFamily="@font/source_sans_3_regular"/>
+                        android:fontFamily="@font/source_sans_3_regular" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -72,60 +72,65 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Основной контентный контейнер -->
-    <LinearLayout
+    <!-- Основной контент с SwipeRefreshLayout -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/mainBackground"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="80dp"
+        android:id="@+id/swipeRefreshLayout">
 
-        <!-- RecyclerView с весом для заполнения пространства -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userList_recyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:clipToPadding="false"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/list_user_items"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/mainBackground">
 
-        <!-- Пустое состояние (скрыто по умолчанию) -->
+            <!-- RecyclerView с CardView элементами -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/userList_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:clipToPadding="false"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/list_user_items" />
 
-        <!-- ProgressBar (скрыт по умолчанию) -->
-        <TextView
-            android:id="@+id/emptyState_textView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/no_users_found"
-            android:textColor="@color/mainPurple"
-            android:textSize="18sp"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <!-- Пустое состояние -->
+            <TextView
+                android:id="@+id/emptyState_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/no_users_found"
+                android:textColor="@color/mainPurple"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:animateLayoutChanges="true" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/mainPurple"
-            android:visibility="gone"/>
+            <!-- ProgressBar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/mainPurple"
+                android:visibility="gone"
+                android:animateLayoutChanges="true" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-    <!-- Bottom Navigation внизу экрана -->
+    <!-- Bottom Navigation -->
     <com.ark_das.springclient.ui.BottomMenuView
         android:id="@+id/bottomMenuView"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom" />
 
-    <!-- Floating Action Button поверх всего -->
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/userList_fab"
         android:layout_width="wrap_content"
@@ -137,6 +142,6 @@
         android:contentDescription="@string/add_user_fab"
         app:backgroundTint="@color/mainPurple"
         app:tint="@color/white"
-        app:elevation="12dp"/>
+        app:elevation="12dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

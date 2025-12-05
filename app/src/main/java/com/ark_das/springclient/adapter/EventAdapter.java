@@ -1,39 +1,46 @@
 package com.ark_das.springclient.adapter;
 
+import static android.view.View.GONE;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
+
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.model.Event;
-import com.ark_das.springclient.model.Role;
+
 import com.ark_das.springclient.model.Tag;
-import com.ark_das.springclient.model.User;
+
 
 import java.util.ArrayList;
+
 import java.util.List;
 
-public class EventAdapter  { //extends RecyclerView.Adapter<EventHolder>
 
-    /*private List<Event> eventList;
-    private List<Tag> tagList;
-    private List<Event> userListFull; // для поиска
+public class EventAdapter extends RecyclerView.Adapter<EventHolder> {
 
-    public EventAdapter(List<Event> eventList, List<Tag> tagList) {
+    private List<Event> eventList;
+    //private List<Tag> tagList;
+    private List<Event> eventListFull; // для поиска
+    private Event event;
+
+    public EventAdapter(List<Event> eventList) {
         this.eventList = eventList != null ? eventList : new ArrayList<>();
-        this.tagList = tagList != null ? tagList : new ArrayList<>();
-        this.userListFull = new ArrayList<>(this.eventList);
+        //this.tagList = tagList != null ? tagList : new ArrayList<>();
+        this.eventListFull = new ArrayList<>(this.eventList);
     }
 
     @NonNull
     @Override
     public EventHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_user_items, parent, false);
+                .inflate(R.layout.list_event_items, parent, false);
         return new EventHolder(view);
     }
 
@@ -44,68 +51,74 @@ public class EventAdapter  { //extends RecyclerView.Adapter<EventHolder>
             bindEmptyView(holder);
             return;
         }
-
-        Event event = eventList.get(position);
+        event = eventList.get(position);
         if (event == null) {
             bindEmptyView(holder);
             return;
         }
-
-        // Заполняем данные пользователя
-        holder.title.setText(event.getTitle() != null ? event.getTitle() : "No title");
-        //holder.tags[0].setText( != null ? event.getLast_name() : "No last name");
-        holder.create_by.setText(event.getCreate_by() != 0 ? event.getCreate_by() : "-");
-
-        // Получаем название роли
-        String roleName = getRoleName(event.getRole_id());
-        holder.id.setText(String.valueOf(event.getId() != 0 ? event.getId() : 0));
+        holder.id.setText(String.valueOf(event.getId()));
+        holder.title.setText(event.getTitle());
+        bindTags(holder);
+        holder.create_by.setText(String.valueOf(event.getCreate_by()));
     }
 
-    private String getRoleName(int roleId) {
-        if (roleList == null || roleList.isEmpty()) {
-            return "Role: " + roleId;
-        }
+    private void bindEmptyView(EventHolder holder) {
+        holder.id.setText("");
+        holder.title.setText("");
+        holder.create_by.setText("");
+        bindTags(holder);
+    }
 
-        // Ищем роль по ID
-        for (Role role : roleList) {
-            if (role.getId() == roleId) {
-                return role.getName() != null ? role.getName() : "Role " + roleId;
+
+    private void bindTags(EventHolder holder) {
+        List<Tag> listTags = new ArrayList<>(event.getTags());
+
+        for (int i = 0; i < holder.tags.length; i++) {
+            TextView view = holder.tags[i];
+
+            if (i < listTags.size()) {
+                Tag tag = listTags.get(i);
+                if (tag != null) {
+                    view.setVisibility(View.VISIBLE);
+                    view.setText(tag.getName());
+                } else {
+                    view.setVisibility(View.GONE);
+                }
+            } else {
+                view.setVisibility(View.GONE);
             }
         }
-
-        return "Unknown role";
     }
 
-    private void bindEmptyView(UserHolder holder) {
-        holder.first_name.setText("No data");
-        holder.last_name.setText("");
-        holder.email.setText("");
-        holder.role.setText("");
-    }
 
     @Override
     public int getItemCount() {
-        return userList != null ? userList.size() : 0;
+        return eventList.size();
     }
 
-    // Метод для обновления данных
-    public void updateData(List<User> newUserList, List<Role> newRoleList) {
-        this.userList = newUserList != null ? newUserList : new ArrayList<>();
-        this.roleList = newRoleList != null ? newRoleList : new ArrayList<>();
-        this.userListFull = new ArrayList<>(this.userList);
+    public void updateData(List<Event> newEventList, List<Tag> newTagList) {
+        this.eventList = newEventList != null ? newEventList : new ArrayList<>();
+        //this.tagList = newTagList != null ? newTagList : new ArrayList<>();
+        this.eventListFull = new ArrayList<>(this.eventList);
         notifyDataSetChanged();
     }
 
+    /*
+
+
+    // Метод для обновления данных
+
+
     // Метод только для пользователей
-    public void setUsers(List<User> userList) {
-        this.userList = userList != null ? userList : new ArrayList<>();
-        this.userListFull = new ArrayList<>(this.userList);
+    public void setEvents(List<Event> evntList) {
+        this.eventList = eventList != null ? eventList : new ArrayList<>();
+        this.eventListFull = new ArrayList<>(this.eventList);
         notifyDataSetChanged();
     }
 
     // Метод только для ролей
-    public void setRoles(List<Role> roleList) {
-        this.roleList = roleList != null ? roleList : new ArrayList<>();
+    public void setTags(List<Tag> tagList) {
+        this.tagList = tagList != null ? tagList : new ArrayList<>();
         notifyDataSetChanged();
     }
 
@@ -117,16 +130,16 @@ public class EventAdapter  { //extends RecyclerView.Adapter<EventHolder>
     private Filter userFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<User> filteredList = new ArrayList<>();
+            List<Event> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(userListFull);
+                filteredList.addAll(eventListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (User user : userListFull) {
-                    if (user.getFirst_name() != null && user.getFirst_name().toLowerCase().contains(filterPattern) ||
-                            user.getLast_name() != null && user.getLast_name().toLowerCase().contains(filterPattern) ||
+                for (Event event : eventListFull) {
+                    if (event.getTitle() != null && event.getTitle().toLowerCase().contains(filterPattern) ||
+                            event.getLast_name() != null && user.getLast_name().toLowerCase().contains(filterPattern) ||
                             user.getEmail() != null && user.getEmail().toLowerCase().contains(filterPattern)) {
                         filteredList.add(user);
                     }
@@ -144,6 +157,6 @@ public class EventAdapter  { //extends RecyclerView.Adapter<EventHolder>
             userList.addAll((List) results.values);
             notifyDataSetChanged();
         }
-    };
-    */
+    };*/
+
 }

@@ -1,6 +1,8 @@
 package com.ark_das.springclient.model;
 
-import java.time.LocalDateTime;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Event {
     private int id;
@@ -11,11 +13,27 @@ public class Event {
 
     private String place;
 
-    private LocalDateTime time;
+    private String time;
 
     private int create_by;
 
-    private LocalDateTime created_at;
+    private String created_at;
+
+    private Set<Tag> tags = new HashSet<>();
+
+    public void setTags(Set<Tag> tag) {
+        tags.clear();
+        tags.addAll(tag);
+    }
+
+    public void deleteTag(Tag tag) {
+        tags.removeIf(t -> t.equals(tag));
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
 
     public int getId() {
         return id;
@@ -45,10 +63,10 @@ public class Event {
         this.place = place;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -59,11 +77,12 @@ public class Event {
         this.create_by = create_by;
     }
 
-    public LocalDateTime getCreated_at() {
+
+    public String getCreated_at() {
         return created_at;
     }
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
 
+    public void setCreated_at(String create_at) {
+        this.created_at = create_at;
+    }
 }

@@ -2,6 +2,7 @@ package com.ark_das.springclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.UserAdapter;
@@ -44,7 +46,8 @@ public class UserListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean rolesLoaded = false;
     private boolean usersLoaded = false;
-    BottomMenuView bottomMenuView;
+    private BottomMenuView bottomMenuView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.userList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyState = findViewById(R.id.emptyState_textView);
@@ -88,6 +92,12 @@ public class UserListActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UserForm.class);
             intent.putExtra("mode", "create");
             startActivity(intent);
+        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshUserList();
+            }
         });
 
         bottomMenuView = findViewById(R.id.bottomMenuView);
@@ -104,6 +114,23 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void refreshUserList() {
+        swipeRefreshLayout.setRefreshing(true);
+
+        // Здесь твой код загрузки пользователей (например, из API или базы)
+        // Для примера через Handler с задержкой 2 сек:
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadRoles();
+                loadUsers();
+                // Скрываем индикатор
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
     private void setupBackPressedCallback() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override

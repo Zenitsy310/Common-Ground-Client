@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class EventHolder extends RecyclerView.ViewHolder{
 
     TextView title, create_by, id;
-    TextView[] tags;
+    TextView[] tags = new TextView[3];
 
     ImageButton event_action;
     public EventHolder(@NonNull View itemView) {
@@ -30,15 +30,15 @@ public class EventHolder extends RecyclerView.ViewHolder{
         create_by = itemView.findViewById(R.id.event_create_by);
         event_action = itemView.findViewById(R.id.event_action);
         id = itemView.findViewById(R.id.event_id);
-        event_action.setOnClickListener(view -> {
+        /*event_action.setOnClickListener(view -> {
             Intent intent = new Intent(itemView.getContext(), EventFormActivity.class);
             String idText = id.getText().toString(); // "123"
-            int userId = Integer.parseInt(idText);
-            intent.putExtra("eventId", userId);
-            Logger.getLogger(UserForm.class.getName()).log(Level.INFO, (String) id.getText());
+            int eventId = Integer.parseInt(idText);
+            intent.putExtra("eventId", eventId);
+            Logger.getLogger(EventFormActivity.class.getName()).log(Level.INFO, (String) id.getText());
             intent.putExtra("mode", "update");
             itemView.getContext().startActivity(intent);
-        });
+        });*/
 
     }
 

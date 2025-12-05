@@ -83,6 +83,7 @@ dependencies {
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
     implementation(libs.material)
+    implementation(libs.swiperefreshlayout)
 
     // Убираем Kotlin и Compose зависимости если не используете:
     // implementation(libs.lifecycle.runtime.ktx)
