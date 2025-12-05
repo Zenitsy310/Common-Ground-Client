@@ -26,6 +26,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
         this.userList = userList != null ? userList : new ArrayList<>();
         this.roleList = roleList != null ? roleList : new ArrayList<>();
         this.userListFull = new ArrayList<>(this.userList);
+        //setStateRestorationPolicy(StateRestorationPolicy.PREVENT_WHEN_EMPTY);
     }
 
     @NonNull

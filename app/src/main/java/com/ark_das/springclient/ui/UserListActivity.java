@@ -3,6 +3,7 @@ package com.ark_das.springclient.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,8 +47,10 @@ public class UserListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean rolesLoaded = false;
     private boolean usersLoaded = false;
-    private BottomMenuView bottomMenuView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private Parcelable mListState;
+    private static final String KEY_RECYCLER_STATE = "recycler_state";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,6 @@ public class UserListActivity extends AppCompatActivity {
 
         initializeViews();
         setupBackPressedCallback();
-
-
 
         // Показываем прогресс бар при старте
         showLoading(true);
@@ -93,6 +94,7 @@ public class UserListActivity extends AppCompatActivity {
             intent.putExtra("mode", "create");
             startActivity(intent);
         });
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -100,7 +102,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
 
-        bottomMenuView = findViewById(R.id.bottomMenuView);
+        BottomMenuView bottomMenuView = findViewById(R.id.bottomMenuView);
         bottomMenuView.setActive(R.id.nav_user);
         bottomMenuView.setOnItemSelectedListener(id -> {
             if (id == R.id.nav_event) {
@@ -118,8 +120,7 @@ public class UserListActivity extends AppCompatActivity {
     private void refreshUserList() {
         swipeRefreshLayout.setRefreshing(true);
 
-        // Здесь твой код загрузки пользователей (например, из API или базы)
-        // Для примера через Handler с задержкой 2 сек:
+        //Обновление списков
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -161,6 +162,11 @@ public class UserListActivity extends AppCompatActivity {
                     // Создаем новый адаптер с обновленными данными
                     userAdapter = new UserAdapter(response.body(), roles);
                     recyclerView.setAdapter(userAdapter);
+
+                    if (mListState != null && recyclerView.getLayoutManager() != null) {
+                        recyclerView.getLayoutManager().onRestoreInstanceState(mListState);
+                        mListState = null; // Очищаем после успешного восстановления
+                    }
 
                     Logger.getLogger(UserListActivity.class.getName()).log(Level.INFO,
                             "Users loaded: " + response.body().size());
@@ -260,12 +266,36 @@ public class UserListActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
-
+    // Восстановление состояния при возврате или пересоздании
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            mListState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE);
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
         // Обновляем только пользователей при возвращении
         // Не показываем прогресс бар при обычном обновлении
         loadUsers();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Сохраняем состояние LayoutManager
+        if (recyclerView.getLayoutManager() != null) {
+            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+        }
+    }
+
+    // Этот метод также используется для сохранения состояния при повороте экрана
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mListState != null) {
+            outState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        }
     }
 }

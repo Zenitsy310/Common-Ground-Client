@@ -3,6 +3,7 @@ package com.ark_das.springclient.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,7 +45,8 @@ public class EventListActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private Parcelable mListState;
+    private static final String KEY_RECYCLER_STATE = "recycler_state";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +125,10 @@ public class EventListActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     eventAdapter = new EventAdapter(response.body());
                     recyclerView.setAdapter(eventAdapter);
+                    if (mListState != null && recyclerView.getLayoutManager() != null) {
+                        recyclerView.getLayoutManager().onRestoreInstanceState(mListState);
+                        mListState = null; // Очищаем после успешного восстановления
+                    }
                     Logger.getLogger(EventListActivity.class.getName()).log(Level.INFO,
                             "Events loaded: +" + response.body().size());
                     checkEmptyState(response.body());
@@ -154,6 +160,37 @@ public class EventListActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
+    // Восстановление состояния при возврате или пересоздании
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            mListState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE);
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Обновляем только пользователей при возвращении
+        // Не показываем прогресс бар при обычном обновлении
+        loadEvents();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Сохраняем состояние LayoutManager
+        if (recyclerView.getLayoutManager() != null) {
+            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+        }
+    }
 
+    // Этот метод также используется для сохранения состояния при повороте экрана
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mListState != null) {
+            outState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        }
+    }
 
 }

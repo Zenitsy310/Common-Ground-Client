@@ -59,6 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventHolder> {
         holder.id.setText(String.valueOf(event.getId()));
         holder.title.setText(event.getTitle());
         bindTags(holder);
+        holder.create.setText("Создано: ");
         holder.create_by.setText(String.valueOf(event.getCreate_by()));
     }
 

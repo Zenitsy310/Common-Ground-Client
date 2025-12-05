@@ -1,5 +1,6 @@
 package com.ark_das.springclient.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -146,15 +148,15 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         });
 
         buttonCancel.setOnClickListener(view -> {
-            putBack();
+            clearForm();
         });
 
         buttonDelete.setOnClickListener(view -> {
-            deleteUser();
+            confirmDelete();
         });
 
         buttonMenu.setOnClickListener(view -> {
-            putBack();
+            onBackPressed();
         });
 
         // Инициализация списка ролей
@@ -208,8 +210,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                 Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });
-
-
     }
 
     private void loadRoles() {
@@ -401,6 +401,26 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
         }
     }
+
+
+    public void confirmDelete(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Выполнить?").setMessage("Вы действительно хотите выполнить это действие?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                deleteUser();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Действие при отмене
+                dialog.dismiss(); // Закрываем диалог
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
     public void deleteUser(){
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
@@ -411,7 +431,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                         if(response.isSuccessful() && response.body().isSuccess()){
                             Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             clearForm();
-                            putBack();
                         }else{
                             Toast.makeText(UserForm.this,
                                     response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -425,8 +444,4 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                 });
     }
 
-    private void putBack() {
-        Intent intent = new Intent(UserForm.this, UserListActivity.class);
-        startActivity(intent);
-    }
 }

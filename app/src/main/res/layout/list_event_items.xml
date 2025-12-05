@@ -10,6 +10,7 @@
     app:cardBackgroundColor="@color/ultraLightPurple">
 
     <LinearLayout
+        android:id="@+id/event_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -110,29 +111,41 @@
             </HorizontalScrollView>
 
             <!-- Создано -->
-            <TextView
-                android:id="@+id/event_create_by"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:background="@color/mainGreen"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textAllCaps="true"
-                android:letterSpacing="0.05"
-                tools:text="@string/event_create_by" />
-        </LinearLayout>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:background="@color/mainGreen"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.05"
+                    tools:text="@string/event_create_by" />
 
-        <!-- Кнопка действий -->
-        <ImageButton
-            android:id="@+id/event_action"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="@string/more_actions"
-            app:tint="@color/white" />
+                <TextView
+                    android:paddingLeft="16dp"
+                    android:id="@+id/event_create_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:background="@color/mainGreen"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textAllCaps="true"
+
+                    android:letterSpacing="0.05"
+                    tools:text="@string/event_create_by" />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

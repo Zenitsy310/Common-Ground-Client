@@ -3,6 +3,7 @@ package com.ark_das.springclient.adapter;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,16 +19,16 @@ public class UserHolder extends RecyclerView.ViewHolder{
 
     TextView first_name, last_name, email, role, id;
 
-    ImageButton user_action;
+    LinearLayout user_item;
     public UserHolder(@NonNull View itemView) {
         super(itemView);
         first_name = itemView.findViewById(R.id.user_first_name);
         last_name = itemView.findViewById(R.id.user_last_name);
         email = itemView.findViewById(R.id.user_email);
         role = itemView.findViewById(R.id.user_role);
-        user_action = itemView.findViewById(R.id.user_action);
+        user_item = itemView.findViewById(R.id.user_item);
         id = itemView.findViewById(R.id.user_id);
-        user_action.setOnClickListener(view -> {
+        user_item.setOnClickListener(view -> {
             Intent intent = new Intent(itemView.getContext(), UserForm.class);
             String idText = id.getText().toString(); // "123"
             int userId = Integer.parseInt(idText);
