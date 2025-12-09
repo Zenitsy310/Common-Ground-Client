@@ -91,4 +91,10 @@
     <string name="icon_event">Список событий</string>
     <string name="add_event_fab">Создать мероприятие</string>
     <string name="date_and_time">Дата и время\n</string>
+    <string name="max_tags">Выбор тегов (макс. 3)</string>
+    <string name="save">СОХРАНИТЬ</string>
+    <string name="cancel">ОТМЕНИТЬ</string>
+    <string name="delete">УДАЛИТЬ</string>
+    <string name="back">Назад</string>
+    <string name="event">Мероприятие</string>
 </resources>

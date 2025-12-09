@@ -50,6 +50,7 @@ public class UserListActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private Parcelable mListState;
     private static final String KEY_RECYCLER_STATE = "recycler_state";
+    BottomMenuView bottomMenuView;
 
 
     @Override
@@ -63,7 +64,7 @@ public class UserListActivity extends AppCompatActivity {
             return insets;
         });
 
-        initializeViews();
+        initializeComponents();
         setupBackPressedCallback();
 
         // Показываем прогресс бар при старте
@@ -78,7 +79,7 @@ public class UserListActivity extends AppCompatActivity {
         loadUsers();
     }
 
-    private void initializeViews() {
+    private void initializeComponents() {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.userList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -102,7 +103,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
 
-        BottomMenuView bottomMenuView = findViewById(R.id.bottomMenuView);
+        bottomMenuView = findViewById(R.id.bottomMenuView);
         bottomMenuView.setActive(R.id.nav_user);
         bottomMenuView.setOnItemSelectedListener(id -> {
             if (id == R.id.nav_event) {
@@ -279,6 +280,7 @@ public class UserListActivity extends AppCompatActivity {
         super.onResume();
         // Обновляем только пользователей при возвращении
         // Не показываем прогресс бар при обычном обновлении
+        bottomMenuView.setActive(R.id.nav_user);
         loadUsers();
     }
     @Override
