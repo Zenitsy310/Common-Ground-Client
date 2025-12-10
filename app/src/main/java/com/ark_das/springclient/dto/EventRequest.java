@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class EventRequest {
 
+    private int id;
+
     private String title;
     private String description;
     private String place;
@@ -23,6 +25,23 @@ public class EventRequest {
         this.time = time;
         this.create_by = create_by;
         this.tagNames = tagNames;
+    }
+
+    public EventRequest(String title, String description, String address, LocalDateTime time, Set<String> tagNames) {
+        this.title = title;
+        this.description = description;
+        this.place = address;
+        this.time = time;
+        this.create_by = create_by;
+        this.tagNames = tagNames;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Геттеры и сеттеры

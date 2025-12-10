@@ -34,7 +34,7 @@ public class EventHolder extends RecyclerView.ViewHolder{
         id = itemView.findViewById(R.id.event_id);
         event_action.setOnClickListener(view -> {
             Intent intent = new Intent(itemView.getContext(), EventFormActivity.class);
-            String idText = id.getText().toString(); // "123"
+            String idText = id.getText().toString();
             int eventId = Integer.parseInt(idText);
             intent.putExtra("eventId", eventId);
             Logger.getLogger(EventFormActivity.class.getName()).log(Level.INFO, (String) id.getText());

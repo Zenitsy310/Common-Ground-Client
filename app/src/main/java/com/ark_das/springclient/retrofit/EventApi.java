@@ -7,6 +7,7 @@ import com.ark_das.springclient.model.Event;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -27,6 +28,6 @@ public interface EventApi {
     Call<EventResponse> getEventById(@Path("id") int eventId);
 
     @POST("/event/save-with-tags")
-    Call<Event> saveEventWithTags(EventRequest eventRequest);
+    Call<EventResponse> saveEventWithTags(@Body EventRequest eventRequest);
 
 }

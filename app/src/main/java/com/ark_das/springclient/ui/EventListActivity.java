@@ -85,7 +85,7 @@ public class EventListActivity extends AppCompatActivity {
             });
         floatingActionButton.setOnClickListener( v ->{
             Intent intent = new Intent(this, EventFormActivity.class);
-            //intent.putExtra("mode", "create");
+            intent.putExtra("mode", "create");
             startActivity(intent);
         });
 

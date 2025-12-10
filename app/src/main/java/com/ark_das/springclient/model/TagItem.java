@@ -17,6 +17,11 @@ public class TagItem {
         this.name = tag.getName();
         this.selected = false;
     }
+    public TagItem(Tag tag, boolean selected) {
+        this.id = tag.getId();
+        this.name = tag.getName();
+        this.selected = selected;
+    }
 
 
 
@@ -40,9 +45,8 @@ public class TagItem {
         this.id = id;
     }
 
-    public TagItem tagToItem(Tag tag){
-        return tagToItem(tag);
+    public static TagItem tagToItem(Tag tag){ // Должен быть статическим
+        return new TagItem(tag);
     }
-
 
 }
