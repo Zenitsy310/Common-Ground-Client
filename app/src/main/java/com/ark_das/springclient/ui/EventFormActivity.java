@@ -60,7 +60,7 @@ public class EventFormActivity extends AppCompatActivity implements Validator.Va
 
     private static final Logger LOGGER = Logger.getLogger(EventFormActivity.class.getName());
 
-    // --- Параметры из Intent и режим ---
+    // Параметры из Intent и режим
     private Bundle arguments;
     private int eventId;
     private String mode; // "create" или "update"

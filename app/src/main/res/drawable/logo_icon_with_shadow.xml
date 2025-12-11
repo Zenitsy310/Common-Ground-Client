@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Тень иконки -->
+    <item
+        android:left="2dp"
+        android:top="2dp">
+        <bitmap
+            android:src="@drawable/ic_common_ground"
+            android:gravity="center"
+            android:alpha="0.25"
+            android:width="140dp"
+            android:height="140dp" />
+    </item>
+
+    <!-- Основная иконка -->
+    <item>
+        <bitmap
+            android:src="@drawable/ic_common_ground"
+            android:gravity="center"
+            android:width="140dp"
+            android:height="140dp" />
+    </item>
+
+</layer-list>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground"
+    android:id="@+id/activity_main"
+    android:fitsSystemWindows="true">
+
+    <!-- Декоративный элемент (фон) -->
+    <View
+        android:id="@+id/decor_background"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/circle_background_decor"
+        android:alpha="0.05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Карточка с неоновым эффектом для иконки -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logo_card"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="20dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:strokeColor="@color/lightPurple"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/app_title"
+        android:layout_marginTop="120dp">
+
+        <!-- Круглая иконка с обрезкой -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logo_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_common_ground"
+            android:scaleType="centerCrop"
+            android:padding="20dp"
+            android:adjustViewBounds="true"
+            app:shapeAppearanceOverlay="@style/CircleImageViewStyle" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Название приложения -->
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="CommonGround"
+        android:textColor="@color/mainPurple"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_card" />
+
+    <!-- Подзаголовок -->
+    <TextView
+        android:id="@+id/app_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Community Platform"
+        android:textColor="@color/mainGreen"
+        android:textSize="18sp"
+        android:alpha="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_title" />
+
+    <!-- Прогресс-бар загрузки -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_progress"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        android:indeterminate="true"
+        app:indicatorColor="@color/mainPurple"
+        app:trackColor="@color/ultraLightPurple"
+        app:trackThickness="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_subtitle" />
+
+    <!-- Текст загрузки -->
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Загрузка"
+        android:textColor="@color/mainGreen"
+        android:textSize="16sp"
+        android:alpha="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loading_progress" />
+
+    <!-- Версия приложения -->
+    <TextView
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:text="v1.0.0"
+        android:textColor="@color/gray_inactive"
+        android:textSize="12sp"
+        android:alpha="0.7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
