@@ -32,7 +32,7 @@ public class UserHolder extends RecyclerView.ViewHolder{
             Intent intent = new Intent(itemView.getContext(), UserForm.class);
             String idText = id.getText().toString(); // "123"
             int userId = Integer.parseInt(idText);
-            intent.putExtra("eventId", userId);
+            intent.putExtra("userId", userId);
             Logger.getLogger(UserForm.class.getName()).log(Level.INFO, (String) id.getText());
             intent.putExtra("mode", "update");
             itemView.getContext().startActivity(intent);

@@ -21,6 +21,20 @@ public class Event {
     private LocalDateTime created_at;
 
     private Set<Tag> tags = new HashSet<>();
+    private Set<User> members = new HashSet<>();
+
+    public void setMembers(Set<User> user) {
+        members.clear();
+        members.addAll(user);
+    }
+
+    public void deleteMember(User user) {
+        members.removeIf(t -> t.equals(user));
+    }
+
+    public Set<User> getMembers() {
+        return members;
+    }
 
     public void setTags(Set<Tag> tag) {
         tags.clear();

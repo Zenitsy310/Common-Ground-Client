@@ -284,8 +284,6 @@ public class EventFormActivity extends AppCompatActivity implements Validator.Va
         });
     }
 
-    // --- Saripaar ValidationListener ---
-
     @Override
     public void onValidationSucceeded() {
         clearAllErrors();

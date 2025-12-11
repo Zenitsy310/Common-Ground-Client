@@ -197,7 +197,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body().getUser();
-                    System.out.println(user);
+                    System.out.println(response.body().getUser().getId());
                     fillForm(user); // ← заполняем форму ПОСЛЕ получения данных
                     Logger.getLogger(UserForm.class.getName()).log(Level.INFO,
                             "User data loaded and form filled");

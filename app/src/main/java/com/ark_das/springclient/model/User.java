@@ -1,6 +1,7 @@
 package com.ark_das.springclient.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class User {
 	private int id;
@@ -13,7 +14,24 @@ public class User {
 	 private String img_data_avatar;
 	 private String created_at;
 	 private String login;
-	 public int getId() {
+
+    private Set<Event> events;
+
+    public void setEvents(Set<Event> event) {
+        events.clear();
+        events.addAll(event);
+    }
+
+    public void deleteEvent(Event event) {
+        events.removeIf(t -> t.equals(event));
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {
