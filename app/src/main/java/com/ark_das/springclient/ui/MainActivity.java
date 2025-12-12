@@ -1,5 +1,7 @@
 package com.ark_das.springclient.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.data.UserDataLoader;
+import com.ark_das.springclient.data.UserDataSaver;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -27,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int DOTS_ANIMATION_INTERVAL = 500; // 0.5 секунды
     private static final int LOGO_ANIMATION_DURATION = 800;
     private static final int TEXT_APPEAR_DELAY = 400;
+
+
+    //данные юзера
+    private int savedId = -1;
+    private String savedRole = "User";
 
     // UI элементы
     private MaterialCardView logoCard;
@@ -105,9 +115,17 @@ public class MainActivity extends AppCompatActivity {
         animationHandler = new Handler();
     }
 
-    /**
-     * Настройка статического контента
-     */
+    private void loadUser(){
+        UserDataLoader loader = new UserDataLoader();
+
+        savedId = loader.loadUserId(this);
+        savedRole = loader.getUserRole(this);
+
+        /*String message = String.format("Пользователь: %d, Роль: %s",
+                savedId, savedRole);
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();*/
+    }
     private void setupStaticContent() {
         try {
             // Установка версии приложения из манифеста
@@ -274,15 +292,25 @@ public class MainActivity extends AppCompatActivity {
      */
     private void navigateToNextScreen() {
         // TODO: Реализуйте вашу логику навигации
-
+        //saveUser();
+        loadUser();
+        if(isNewUser()){
+            //Toast.makeText(this, "UserId: " + savedId, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, UserListActivity.class);
+            startActivity(intent);
+        }else{
+            //Toast.makeText(this, "New user", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, RegisterForm.class);
+            startActivity(intent);
+        }
         // Пример структуры:
         // 1. Проверить авторизацию
         // 2. Определить роль пользователя
         // 3. Перейти на соответствующий экран
         // 4. Применить анимацию перехода
-
-        // Временный Toast для демонстрации
-        // Toast.makeText(this, "Навигация на следующий экран", Toast.LENGTH_SHORT).show();
+    }
+    private boolean isNewUser(){
+        return savedId != -1;
     }
 
     /**
@@ -304,4 +332,8 @@ public class MainActivity extends AppCompatActivity {
         loadingText.clearAnimation();
         decorBackground.clearAnimation();
     }
+    /*private void saveUser(){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUser(this,-1, "role");
+    }*/
 }

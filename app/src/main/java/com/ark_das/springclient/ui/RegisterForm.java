@@ -3,6 +3,7 @@ package com.ark_das.springclient.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.textservice.SpellCheckerSession;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,9 +15,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.data.UserDataLoader;
+import com.ark_das.springclient.data.UserDataSaver;
 import com.ark_das.springclient.dto.LoginResponse;
+import com.ark_das.springclient.dto.RoleResponse;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
+import com.ark_das.springclient.retrofit.RoleApi;
 import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -145,6 +150,9 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if(response.isSuccessful() && response.body().isSuccess()){
+                            saveUserRoleName(response.body().getUser().getRole_id());
+                            saveUserIdLocal(response.body().getUser().getId());
+                            loadUser();
                             Toast.makeText(RegisterForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterForm.this, UserListActivity.class);
                             startActivity(intent);
@@ -160,6 +168,26 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
                     }
                 });
 
+    }
+    private void saveUserRoleName(int id){
+        RetrofitService retrofitService = new RetrofitService();
+        RoleApi roleApi = retrofitService.getRetrofit().create(RoleApi.class);
+        roleApi.getRoleById(id).enqueue(new Callback<RoleResponse>() {
+            @Override
+            public void onResponse(Call<RoleResponse> call, Response<RoleResponse> response) {
+                if(response.isSuccessful() && response.body().isSuccess()){
+                    saveUserRoleNameLocal(response.body().getRole().getName());
+                }else{
+                    Toast.makeText(RegisterForm.this,
+                            response.body().getMessage() != null? response.body().getMessage() : "Server error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<RoleResponse> call, Throwable t) {
+                Toast.makeText(RegisterForm.this, "Server eror", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
+            }
+        });
     }
 
     private void clearEditTextLayouts() {
@@ -194,5 +222,29 @@ public class RegisterForm extends AppCompatActivity implements Validator.Validat
             }
         }
 
+    }
+    private void loadUser(){
+        UserDataLoader loader = new UserDataLoader();
+
+        int savedId = loader.loadUserId(this);
+        String savedRole = loader.getUserRole(this);
+
+        String message = String.format("Пользователь: %d, Роль: %s",
+                savedId, savedRole);
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+    private void saveUserLocal(int userId, String role){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUser(this,userId, role);
+    }
+    private void saveUserRoleNameLocal(String role){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUserRoleName(this, role);
+    }
+
+    private void saveUserIdLocal(int id){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUserId(this, id);
     }
 }
