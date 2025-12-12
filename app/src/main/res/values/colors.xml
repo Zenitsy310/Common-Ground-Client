@@ -11,4 +11,11 @@
     <color name="red">#E91E63</color>
     <color name="gray_inactive">#757575</color>
 
+    <color name="mainGreenBright">#66BB6A</color> <!-- лаймовый -->
+    <color name="mainGreenEmerald">#2ECC71</color> <!-- яркий сочный зеленый -->
+    <color name="mainGreenMaterial">#4CAF50</color> <!-- классический Material зеленый -->
+
+
+
+
 </resources>
