@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -16,6 +16,14 @@
         android:theme="@style/Theme.CommonGround"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.RegisterForm"
             android:exported="true" />
@@ -32,10 +40,25 @@
         <activity
             android:name=".ui.UserListActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:exported="true">
+        </activity><activity
+            android:name=".ui.UserProfileActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.ChatListActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.ChangePasswordActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".ui.UserForm"

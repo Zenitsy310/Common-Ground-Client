@@ -10,6 +10,7 @@
     app:cardBackgroundColor="@color/ultraLightPurple">
 
     <LinearLayout
+        android:id="@+id/user_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -89,6 +90,12 @@
                 android:textSize="16sp"
                 android:textColor="@color/mainPurple"
                 tools:text="@string/email" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+            </LinearLayout>
 
             <!-- Дополнительная информация -->
             <TextView
@@ -105,16 +112,6 @@
                 tools:text="@string/role" />
 
         </LinearLayout>
-
-        <!-- Кнопка действий -->
-        <ImageButton
-            android:id="@+id/user_action"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/more_actions"
-            app:tint="@color/white" />
 
     </LinearLayout>
 

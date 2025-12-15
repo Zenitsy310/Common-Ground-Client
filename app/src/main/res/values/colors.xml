@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="mainGreen" >#787049</color>
-    <color name="mainBackGround">#d5d7bf</color>
-    <color name="ultraLightPurple">#bbabb5</color>
-    <color name="lightPurple">#998199</color>
-    <color name="mainPurple">#6f5c89</color>
-    <color name="mainBackground">#d5d7bf</color>
-    <color name="red">#E91E63</color>
-    <color name="gray_inactive">#757575</color>
+
+    <!-- Цвета для светлой темы -->
+    <color name="black">#FF000000</color>  <!-- Черный цвет -->
+    <color name="white">#FFFFFFFF</color>  <!-- Белый цвет -->
+    <color name="mainGreen">#787049</color>  <!-- Основной зеленый -->
+    <color name="mainBackground">#d5d7bf</color>  <!-- Светлый фон -->
+    <color name="lightPurple">#998199</color>  <!-- Светлый фиолетовый -->
+    <color name="mainPurple">#6f5c89</color>  <!-- Основной фиолетовый -->
+    <color name="red">#E91E63</color>  <!-- Красный цвет -->
+    <color name="ultraLightPurple">#bbabb5</color>  <!-- очень Светлый фиолетовый -->
+    <color name="gray_inactive">#757575</color>  <!-- Тёмно-серый для неактивных элементов -->
+
+
+    <!-- Цвета для тёмной темы -->
+    <color name="darkGreen">#388E3C</color>  <!-- Темно-зеленый -->
+    <color name="darkBackground">#121212</color>  <!-- Тёмный фон -->
+    <color name="darkPurple">#6A4E75</color>  <!-- Темный фиолетовый -->
+    <color name="darkPurpleLight">#7A6A82</color>  <!-- Светлый тёмный фиолетовый -->
+
+
+    <!-- Яркие цвета для тёмной темы -->
+    <color name="mainGreenBright">#66BB6A</color> <!-- Лаймовый -->
+    <color name="mainGreenEmerald">#2ECC71</color> <!-- Яркий зеленый -->
+    <color name="mainGreenMaterial">#4CAF50</color> <!-- Классический Material зеленый -->
+
+
+
+
+
+
 
 </resources>

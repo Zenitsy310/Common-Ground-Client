@@ -14,6 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.base_activity.BaseActivity;
+import com.ark_das.springclient.data.UserDataLoader;
+import com.ark_das.springclient.data.UserDataSaver;
+import com.ark_das.springclient.dto.RoleResponse;
+import com.ark_das.springclient.retrofit.RoleApi;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -37,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginForm extends AppCompatActivity implements Validator.ValidationListener{
+public class LoginForm extends BaseActivity implements Validator.ValidationListener{
 
     private Validator validator;
 
@@ -115,6 +120,9 @@ public class LoginForm extends AppCompatActivity implements Validator.Validation
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if(response.isSuccessful() && response.body().isSuccess()){ //&& response.body().getId() != 0
+                            saveUserRoleName(response.body().getUser().getRole_id());
+                            saveUserIdLocal(response.body().getUser().getId());
+                            loadUser();
                             Toast.makeText(LoginForm.this, "Login successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginForm.this, UserListActivity.class);
                             startActivity(intent);
@@ -151,4 +159,51 @@ public class LoginForm extends AppCompatActivity implements Validator.Validation
             }
         }
     }
+
+    private void saveUserRoleName(int id){
+        RetrofitService retrofitService = new RetrofitService();
+        RoleApi roleApi = retrofitService.getRetrofit().create(RoleApi.class);
+        roleApi.getRoleById(id).enqueue(new Callback<RoleResponse>() {
+            @Override
+            public void onResponse(Call<RoleResponse> call, Response<RoleResponse> response) {
+                if(response.isSuccessful() && response.body().isSuccess()){
+                    saveUserRoleNameLocal(response.body().getRole().getName());
+                }else{
+                    Toast.makeText(LoginForm.this,
+                            response.body().getMessage() != null? response.body().getMessage() : "Server error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<RoleResponse> call, Throwable t) {
+                Toast.makeText(LoginForm.this, "Server eror", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
+            }
+        });
+    }
+
+    private void loadUser(){
+        UserDataLoader loader = new UserDataLoader();
+
+        int savedId = loader.loadUserId(this);
+        String savedRole = loader.getUserRole(this);
+
+        String message = String.format("Пользователь: %d, Роль: %s",
+                savedId, savedRole);
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+    private void saveUserLocal(int userId, String role){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUser(this,userId, role);
+    }
+    private void saveUserRoleNameLocal(String role){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUserRoleName(this, role);
+    }
+
+    private void saveUserIdLocal(int id){
+        UserDataSaver saver = new UserDataSaver();
+        saver.saveUserId(this, id);
+    }
+
 }

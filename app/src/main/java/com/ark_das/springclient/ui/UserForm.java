@@ -1,5 +1,6 @@
 package com.ark_das.springclient.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.dto.UserRequest;
 import com.ark_das.springclient.dto.UserResponse;
@@ -42,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
+public class UserForm extends BaseActivity implements Validator.ValidationListener {
 
     private Bundle arguments;
     private int userId;
@@ -71,13 +74,15 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
     @Length(min = 3, message = "В почте должно быть не короче 3 символов")
     TextInputEditText inpuntEditTextEmail;
 
+    @NotEmpty(message = "Введите логин")
+    @Length(min = 3, message = "В лоигне должно быть не короче 3 символов")
+    TextInputEditText inpuntEditTextLogin;
+
     @Password(min = 8, message = "Пароль должен содержать минимум 8 символов")
     @Pattern(regex = ".*[A-Z].*", message = "Пароль должен содержать хотя бы одну заглавную букву")
     TextInputEditText inpuntEditTextPassword;
 
-    @NotEmpty(message = "Введите логин")
-    @Length(min = 3, message = "В лоигне должно быть не короче 3 символов")
-    TextInputEditText inpuntEditTextLogin;
+
 
     TextInputEditText inputBio;
 
@@ -146,15 +151,15 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
         });
 
         buttonCancel.setOnClickListener(view -> {
-            putBack();
+            clearForm();
         });
 
         buttonDelete.setOnClickListener(view -> {
-            deleteUser();
+            confirmDelete();
         });
 
         buttonMenu.setOnClickListener(view -> {
-            putBack();
+            onBackPressed();
         });
 
         // Инициализация списка ролей
@@ -195,7 +200,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body().getUser();
-                    System.out.println(user);
+                    System.out.println(response.body().getUser().getId());
                     fillForm(user); // ← заполняем форму ПОСЛЕ получения данных
                     Logger.getLogger(UserForm.class.getName()).log(Level.INFO,
                             "User data loaded and form filled");
@@ -208,8 +213,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                 Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });
-
-
     }
 
     private void loadRoles() {
@@ -312,7 +315,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             } else if (view.getId() == R.id.form_textFieldPassword) {
                 layout_form_textFieldPassword.setError(message);
             } else if (view.getId() == R.id.form_textFieldLogin) {
-                layout_form_textFieldPassword.setError(message);
+                layout_form_textFieldLogin.setError(message);
             } else if (view.getId() == R.id.form_textFieldBio) {
                 layout_form_textFieldBio.setError(message);
             } else if (view.getId() == R.id.form_spinnerRole) {
@@ -381,19 +384,19 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                         });
         } else if (mode.equals("update")) {
             user.setId(userId);
-            userApi.save(user).enqueue(new Callback<UserResponse>() {
+            userApi.save(user).enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body().isSuccess()) {
                         Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(UserForm.this,
-                                response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                response.body() != null?response.body().getMessage(): "save error", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<UserResponse> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Toast.makeText(UserForm.this, "Server eror", Toast.LENGTH_SHORT).show();
                     Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
                 }
@@ -401,6 +404,26 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
 
         }
     }
+
+
+    public void confirmDelete(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Выполнить?").setMessage("Вы действительно хотите выполнить это действие?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                deleteUser();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Действие при отмене
+                dialog.dismiss(); // Закрываем диалог
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
     public void deleteUser(){
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
@@ -411,7 +434,6 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                         if(response.isSuccessful() && response.body().isSuccess()){
                             Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             clearForm();
-                            putBack();
                         }else{
                             Toast.makeText(UserForm.this,
                                     response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -425,8 +447,4 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                 });
     }
 
-    private void putBack() {
-        Intent intent = new Intent(UserForm.this, UserListActivity.class);
-        startActivity(intent);
-    }
 }

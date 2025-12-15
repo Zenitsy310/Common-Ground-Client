@@ -1,11 +1,14 @@
 package com.ark_das.springclient.model;
 
+import java.util.Set;
+
 public class Tag {
 
     private int id;
 
     private String name;
 
+    private Set<Event> events;
 
     public int getId() {
         return id;

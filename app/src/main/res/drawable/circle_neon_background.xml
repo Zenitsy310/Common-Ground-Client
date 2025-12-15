@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Внешняя тень -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#30000000" />
+
+        </shape>
+    </item>
+
+    <!-- Свечение -->
+    <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#40FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:type="radial"
+                android:gradientRadius="110" />
+        </shape>
+    </item>
+
+    <!-- Белый фон -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+
+</layer-list>

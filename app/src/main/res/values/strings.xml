@@ -1,4 +1,5 @@
 <resources>
+
     <!-- App name -->
     <string name="app_name">Common Ground</string>
 
@@ -6,7 +7,7 @@
     <string name="form_title_add_user">Редактирование пользователя</string>
     <string name="avatar_description">Описание аватара</string>
     <string name="change_avatar">Сменить аватар</string>
-    <string name="form_password">пароль</string>
+    <string name="form_password">Пароль</string>
     <string name="form_bio">Биография</string>
     <string name="form_role">Роль</string>
     <string name="button_cancel">Отмена</string>
@@ -18,28 +19,32 @@
     <string name="form_email">Email</string>
     <string name="form_login">Логин</string>
     <string name="form_password_hash">Пароль</string>
-    <!-- Strings for button-->
+
+    <!-- Buttons -->
     <string name="button_save_user">Сохранить пользователя</string>
     <string name="button_edit_user">Редактировать пользователя</string>
     <string name="button_delete_user">Удалить пользователя</string>
-    <!-- Users atributs -->
+
+    <!-- User attributes -->
     <string name="id">ID</string>
     <string name="fist_name">Имя</string>
     <string name="last_name">Фамилия</string>
     <string name="email">Email</string>
     <string name="password">Пароль</string>
     <string name="login">Логин</string>
-
     <string name="role">Роль</string>
+
     <string name="login_back">С возвращением! Пожалуйста, войдите чтобы продолжить</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="Dont_have_an_account">Нет аккаунта?</string>
-    <!--Strings for list_user_items -->
+
+    <!-- List user items -->
     <string name="list_user_item_login">Логин пользователя</string>
     <string name="list_user_item_created_at">Пользователь создан</string>
     <string name="list_user_item_email">Email пользователя</string>
-    <!-- Strings used for fragments for navigation -->
+
+    <!-- Navigation -->
     <string name="first_fragment_label">Первый фрагмент</string>
     <string name="second_fragment_label">Второй фрагмент</string>
     <string name="next">Далее</string>
@@ -47,6 +52,7 @@
     <string name="no_users_found">Пользователи не найдены</string>
     <string name="user_avatar">Аватар пользователя</string>
     <string name="more_actions">Дополнительные действия</string>
+
     <string name="title_activity_login">Авторизация</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Пароль</string>
@@ -56,10 +62,11 @@
     <string name="invalid_username">Некорректное имя пользователя</string>
     <string name="invalid_password">Пароль должен содержать более 5 символов</string>
     <string name="login_failed">Ошибка входа</string>
-    <!--Заголовки страниц -->
+
+    <!-- Event pages -->
     <string name="event_form_title">Создание события</string>
 
-    <!--Activity_event_form -->
+    <!-- Activity_event_form -->
     <string name="select_date_time">Выбрать дату и время</string>
     <string name="new_event">Новое событие</string>
     <string name="fill_all_fields">Заполните все поля</string>
@@ -67,16 +74,21 @@
     <string name="event_description">Подробное описание</string>
     <string name="place_and_time">МЕСТО И ВРЕМЯ</string>
     <string name="adress">Адрес</string>
-    <string name="date_and_time">ДД.ММ.ГГГГ --:--</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
     <string name="categories">КАТЕГОРИИ</string>
     <string name="choose_tags">Выберите теги</string>
     <string name="btn_create">СОЗДАТЬ</string>
     <string name="btn_cancel">ОТМЕНИТЬ</string>
     <string name="btn_delete_event">УДАЛИТЬ СОБЫТИЕ</string>
+
     <string name="add_user_fab">Создать</string>
     <string name="icon_user">Аватар</string>
 
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <!-- Technical / non-translatable -->
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+    <string name="title_activity_test" translatable="false">test</string>
+
     <string name="action_settings">Настройки</string>
 
     <string name="events_list">Список мероприятий</string>
@@ -86,7 +98,18 @@
     <string name="tag">Тэг</string>
     <string name="event_name">Название мероприятия</string>
     <string name="event_create_by">Создано</string>
-    <string name="title_activity_test">test</string>
     <string name="icon_event">Список событий</string>
     <string name="add_event_fab">Создать мероприятие</string>
+    <string name="date_and_time">Дата и время</string>
+    <string name="max_tags">Выбор тегов (макс. 3)</string>
+
+    <string name="save">СОХРАНИТЬ</string>
+    <string name="cancel">ОТМЕНИТЬ</string>
+    <string name="delete">УДАЛИТЬ</string>
+    <string name="back">Назад</string>
+    <string name="event">Мероприятие</string>
+    <string name="app_logo_desc">Логотип</string>
+
+    <string name="settings_subtitle">Персонализация вашего приложения</string>
+
 </resources>

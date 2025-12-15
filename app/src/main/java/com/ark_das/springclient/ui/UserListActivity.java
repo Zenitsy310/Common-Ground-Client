@@ -2,6 +2,8 @@ package com.ark_das.springclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,9 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.UserAdapter;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.model.Role;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
@@ -34,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private long backPressedTime = 0;
@@ -44,7 +48,11 @@ public class UserListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean rolesLoaded = false;
     private boolean usersLoaded = false;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private Parcelable mListState;
+    private static final String KEY_RECYCLER_STATE = "recycler_state";
     BottomMenuView bottomMenuView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +65,8 @@ public class UserListActivity extends AppCompatActivity {
             return insets;
         });
 
-        initializeViews();
+        initializeComponents();
         setupBackPressedCallback();
-
-
 
         // Показываем прогресс бар при старте
         showLoading(true);
@@ -74,7 +80,8 @@ public class UserListActivity extends AppCompatActivity {
         loadUsers();
     }
 
-    private void initializeViews() {
+    private void initializeComponents() {
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.userList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyState = findViewById(R.id.emptyState_textView);
@@ -90,20 +97,43 @@ public class UserListActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshUserList();
+            }
+        });
+
         bottomMenuView = findViewById(R.id.bottomMenuView);
         bottomMenuView.setActive(R.id.nav_user);
         bottomMenuView.setOnItemSelectedListener(id -> {
             if (id == R.id.nav_event) {
                 startActivity(new Intent(this, EventListActivity.class));
-            } else if (id == R.id.nav_chat) {
-                startActivity(new Intent(this, EventListActivity.class));
-            } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(this, EventListActivity.class));
+            }/* else if (id == R.id.nav_chat) {
+                startActivity(new Intent(this, ChatListActivity.class));
+            } */else if (id == R.id.nav_profile) {
+                startActivity(new Intent(this, UserProfileActivity.class));
             } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(this, EventListActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
             }
         });
     }
+
+    private void refreshUserList() {
+        swipeRefreshLayout.setRefreshing(true);
+
+        //Обновление списков
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadRoles();
+                loadUsers();
+                // Скрываем индикатор
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
     private void setupBackPressedCallback() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -134,6 +164,11 @@ public class UserListActivity extends AppCompatActivity {
                     // Создаем новый адаптер с обновленными данными
                     userAdapter = new UserAdapter(response.body(), roles);
                     recyclerView.setAdapter(userAdapter);
+
+                    if (mListState != null && recyclerView.getLayoutManager() != null) {
+                        recyclerView.getLayoutManager().onRestoreInstanceState(mListState);
+                        mListState = null; // Очищаем после успешного восстановления
+                    }
 
                     Logger.getLogger(UserListActivity.class.getName()).log(Level.INFO,
                             "Users loaded: " + response.body().size());
@@ -233,12 +268,37 @@ public class UserListActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
-
+    // Восстановление состояния при возврате или пересоздании
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            mListState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE);
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
         // Обновляем только пользователей при возвращении
         // Не показываем прогресс бар при обычном обновлении
+        bottomMenuView.setActive(R.id.nav_user);
         loadUsers();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Сохраняем состояние LayoutManager
+        if (recyclerView.getLayoutManager() != null) {
+            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+        }
+    }
+
+    // Этот метод также используется для сохранения состояния при повороте экрана
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mListState != null) {
+            outState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        }
     }
 }
