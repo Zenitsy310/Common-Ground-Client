@@ -70,11 +70,11 @@ public class EventListActivity extends AppCompatActivity {
                 if (id == R.id.nav_user) {
                     startActivity(new Intent(this, UserListActivity.class));
                 } else if (id == R.id.nav_chat) {
-                    startActivity(new Intent(this, UserListActivity.class));
+                    startActivity(new Intent(this, ChatListActivity.class));
                 } else if (id == R.id.nav_profile) {
-                    startActivity(new Intent(this, UserListActivity.class));
+                    startActivity(new Intent(this, UserProfileActivity.class));
                 } else if (id == R.id.nav_settings) {
-                    startActivity(new Intent(this, UserListActivity.class));
+                    startActivity(new Intent(this, SettingsActivity.class));
                 }
             });
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

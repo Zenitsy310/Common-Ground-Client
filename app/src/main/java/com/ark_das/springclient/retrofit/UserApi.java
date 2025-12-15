@@ -19,7 +19,7 @@ public interface UserApi {
     Call<List<User>> getAllUsers();
 
     @POST("/user/save")
-    Call<UserResponse> save(@Body User user);
+    Call<LoginResponse> save(@Body User user);
 
     @POST("/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);

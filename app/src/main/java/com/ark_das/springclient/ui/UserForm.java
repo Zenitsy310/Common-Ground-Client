@@ -73,13 +73,15 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
     @Length(min = 3, message = "В почте должно быть не короче 3 символов")
     TextInputEditText inpuntEditTextEmail;
 
+    @NotEmpty(message = "Введите логин")
+    @Length(min = 3, message = "В лоигне должно быть не короче 3 символов")
+    TextInputEditText inpuntEditTextLogin;
+
     @Password(min = 8, message = "Пароль должен содержать минимум 8 символов")
     @Pattern(regex = ".*[A-Z].*", message = "Пароль должен содержать хотя бы одну заглавную букву")
     TextInputEditText inpuntEditTextPassword;
 
-    @NotEmpty(message = "Введите логин")
-    @Length(min = 3, message = "В лоигне должно быть не короче 3 символов")
-    TextInputEditText inpuntEditTextLogin;
+
 
     TextInputEditText inputBio;
 
@@ -312,7 +314,7 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
             } else if (view.getId() == R.id.form_textFieldPassword) {
                 layout_form_textFieldPassword.setError(message);
             } else if (view.getId() == R.id.form_textFieldLogin) {
-                layout_form_textFieldPassword.setError(message);
+                layout_form_textFieldLogin.setError(message);
             } else if (view.getId() == R.id.form_textFieldBio) {
                 layout_form_textFieldBio.setError(message);
             } else if (view.getId() == R.id.form_spinnerRole) {
@@ -381,19 +383,19 @@ public class UserForm extends AppCompatActivity implements Validator.ValidationL
                         });
         } else if (mode.equals("update")) {
             user.setId(userId);
-            userApi.save(user).enqueue(new Callback<UserResponse>() {
+            userApi.save(user).enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body().isSuccess()) {
                         Toast.makeText(UserForm.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(UserForm.this,
-                                response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                response.body() != null?response.body().getMessage(): "save error", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<UserResponse> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Toast.makeText(UserForm.this, "Server eror", Toast.LENGTH_SHORT).show();
                     Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, "Error occured", t);
                 }

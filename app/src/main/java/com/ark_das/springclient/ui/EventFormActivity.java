@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.TagsAdapter;
+import com.ark_das.springclient.data.UserDataLoader;
 import com.ark_das.springclient.dto.EventRequest;
 import com.ark_das.springclient.dto.EventResponse;
 import com.ark_das.springclient.model.Event;
@@ -312,7 +313,7 @@ public class EventFormActivity extends AppCompatActivity implements Validator.Va
         }
 
 
-        int userId = 1; // <--- ЗАМЕНИТЬ НА РЕАЛЬНЫЙ ID ПОЛЬЗОВАТЕЛЯ
+        int userId = getCurentUsersId();
 
         // 4. Создаем EventRequest (напрямую, используя DTO)
         EventRequest eventRequest = new EventRequest(
@@ -326,6 +327,10 @@ public class EventFormActivity extends AppCompatActivity implements Validator.Va
 
         // 5. Вызываем функцию сохранения/обновления
         saveOrUpdateEvent(eventRequest);
+    }
+    private int getCurentUsersId(){
+        UserDataLoader loader = new UserDataLoader();
+        return loader.loadUserId(this);
     }
 
     @Override

@@ -109,11 +109,11 @@ public class UserListActivity extends AppCompatActivity {
             if (id == R.id.nav_event) {
                 startActivity(new Intent(this, EventListActivity.class));
             } else if (id == R.id.nav_chat) {
-                startActivity(new Intent(this, EventListActivity.class));
+                startActivity(new Intent(this, ChatListActivity.class));
             } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(this, EventListActivity.class));
+                startActivity(new Intent(this, UserProfileActivity.class));
             } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(this, EventListActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
             }
         });
     }

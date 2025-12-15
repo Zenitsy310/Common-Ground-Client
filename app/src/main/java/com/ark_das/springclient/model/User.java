@@ -12,7 +12,7 @@ public class User {
 	 private String bio;
 	 private int role_id;
 	 private String img_data_avatar;
-	 private String created_at;
+	 private LocalDateTime created_at;
 	 private String login;
 
     private Set<Event> events;
@@ -87,10 +87,10 @@ public class User {
 		this.img_data_avatar = img_data_avatar;
 	}
 	
-	public String getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(String created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
 	
