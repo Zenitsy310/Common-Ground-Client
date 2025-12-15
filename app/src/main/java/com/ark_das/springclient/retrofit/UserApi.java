@@ -1,5 +1,6 @@
 package com.ark_das.springclient.retrofit;
 
+import com.ark_das.springclient.dto.ChangePasswordRequest;
 import com.ark_das.springclient.dto.LoginRequest;
 import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.dto.UserRequest;
@@ -32,5 +33,8 @@ public interface UserApi {
 
     @DELETE("/user/{id}")
     Call<UserResponse> deleteById(@Path("id")int userId);
+
+    @POST("/user/change-password")
+    Call<LoginResponse> changePassword(@Body ChangePasswordRequest request);
 
 }

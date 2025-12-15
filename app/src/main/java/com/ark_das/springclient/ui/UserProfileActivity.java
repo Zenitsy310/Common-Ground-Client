@@ -2,18 +2,17 @@ package com.ark_das.springclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.data.UserDataLoader;
 import com.ark_das.springclient.dto.UserRequest;
 import com.ark_das.springclient.dto.UserResponse;
@@ -23,9 +22,6 @@ import com.ark_das.springclient.retrofit.UserApi;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends BaseActivity {
 
     // ===== Toolbar =====
     private TextView tvTitle;
@@ -51,6 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView inputBio;
     private TextView inputRegisterDate;
 
+    //private Spinner spinner;
     // ===== Actions =====
     private MaterialButton btnEditProfile;
 
@@ -94,6 +91,7 @@ public class UserProfileActivity extends AppCompatActivity {
         inputBio          = findViewById(R.id.form_textFieldBio);
         inputRegisterDate = findViewById(R.id.form_textFieldRegisterDate);
 
+        //spinner = findViewById(R.id.spinnerLanguage);
         // Actions
         btnEditProfile = findViewById(R.id.btnEditProfile);
 
@@ -111,17 +109,17 @@ public class UserProfileActivity extends AppCompatActivity {
         );
     }
 
+
     private void setupBottomMenu() {
         bottomMenuView.setActive(R.id.nav_profile);
-
         bottomMenuView.setOnItemSelectedListener(id -> {
             if (id == R.id.nav_event) {
                 startActivity(new Intent(this, EventListActivity.class));
             } else if (id == R.id.nav_user) {
                 startActivity(new Intent(this, UserListActivity.class));
-            } else if (id == R.id.nav_chat) {
+            }/* else if (id == R.id.nav_chat) {
                 startActivity(new Intent(this, ChatListActivity.class));
-            } else if (id == R.id.nav_settings) {
+            } */else if (id == R.id.nav_settings) {
                 startActivity(new Intent(this, SettingsActivity.class));
             }
         });

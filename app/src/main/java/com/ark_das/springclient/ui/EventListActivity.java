@@ -20,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.EventAdapter;
 import com.ark_das.springclient.adapter.UserAdapter;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.model.Event;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.EventApi;
@@ -35,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EventListActivity extends AppCompatActivity {
+public class EventListActivity extends BaseActivity {
 
     //private List<Event> events;
     private TextView emptyState;
@@ -69,9 +70,9 @@ public class EventListActivity extends AppCompatActivity {
             bottomMenuView.setOnItemSelectedListener(id -> {
                 if (id == R.id.nav_user) {
                     startActivity(new Intent(this, UserListActivity.class));
-                } else if (id == R.id.nav_chat) {
+                }/* else if (id == R.id.nav_chat) {
                     startActivity(new Intent(this, ChatListActivity.class));
-                } else if (id == R.id.nav_profile) {
+                } */else if (id == R.id.nav_profile) {
                     startActivity(new Intent(this, UserProfileActivity.class));
                 } else if (id == R.id.nav_settings) {
                     startActivity(new Intent(this, SettingsActivity.class));

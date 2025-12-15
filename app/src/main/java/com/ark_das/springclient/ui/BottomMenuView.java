@@ -2,19 +2,15 @@ package com.ark_das.springclient.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import androidx.annotation.Nullable;
 
 import com.ark_das.springclient.R;
 
 public class BottomMenuView extends LinearLayout {
 
-    private FrameLayout navUser, navEvent, navChat, navProfile, navSettings;
+    private FrameLayout navUser, navEvent,  navProfile, navSettings;//navChat,
     private int activeId = -1; // текущая активная кнопка
     private OnItemSelectedListener listener;
 
@@ -30,11 +26,11 @@ public class BottomMenuView extends LinearLayout {
 
         navUser = findViewById(R.id.nav_user);
         navEvent = findViewById(R.id.nav_event);
-        navChat = findViewById(R.id.nav_chat);
+        //navChat = findViewById(R.id.nav_chat);
         navProfile = findViewById(R.id.nav_profile);
         navSettings = findViewById(R.id.nav_settings);
 
-        FrameLayout[] buttons = {navUser, navEvent, navChat, navProfile, navSettings};
+        FrameLayout[] buttons = {navUser, navEvent,  navProfile, navSettings};//navChat,
 
         for (FrameLayout btn : buttons) {
             btn.setOnClickListener(v -> {
@@ -48,7 +44,7 @@ public class BottomMenuView extends LinearLayout {
 
     public void setActive(int id) {
         // Сброс цвета всех кнопок
-        FrameLayout[] buttons = {navUser, navEvent, navChat, navProfile, navSettings};
+        FrameLayout[] buttons = {navUser, navEvent, navProfile, navSettings};//navChat,
         for (FrameLayout btn : buttons) {
             ImageView icon = (ImageView) btn.getChildAt(0);
             icon.setColorFilter(getResources().getColor(R.color.black));

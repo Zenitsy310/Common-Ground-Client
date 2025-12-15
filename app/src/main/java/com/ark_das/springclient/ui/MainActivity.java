@@ -1,5 +1,6 @@
 package com.ark_das.springclient.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,15 +18,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.data.UserDataLoader;
 import com.ark_das.springclient.data.UserDataSaver;
+import com.ark_das.springclient.notification.NotificationWorker;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.concurrent.TimeUnit;
+
+public class MainActivity extends BaseActivity {
 
     // Константы времени
     private static final int SPLASH_DURATION = 2500; // 2.5 секунды
@@ -75,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Запланировать переход на следующий экран
         scheduleNextScreenNavigation();
+
+        //sendNotificationAfterTime(this);
+
+        //attachBaseContext();
     }
+
 
     /**
      * Настройка отступов для системных баров
@@ -126,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();*/
     }
+
     private void setupStaticContent() {
         try {
             // Установка версии приложения из манифеста
@@ -138,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             versionText.setText("v1.0.0");
         }
     }
+
 
     /**
      * Запуск всех UI анимаций

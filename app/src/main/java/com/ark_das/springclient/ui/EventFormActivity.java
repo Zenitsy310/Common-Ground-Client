@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.TagsAdapter;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.data.UserDataLoader;
 import com.ark_das.springclient.dto.EventRequest;
 import com.ark_das.springclient.dto.EventResponse;
@@ -57,7 +58,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EventFormActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class EventFormActivity extends BaseActivity implements Validator.ValidationListener {
 
     private static final Logger LOGGER = Logger.getLogger(EventFormActivity.class.getName());
 

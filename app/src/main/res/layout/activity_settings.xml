@@ -11,7 +11,6 @@
 
     <!-- ===== AppBarLayout + Toolbar ===== -->
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/appbar_gradient_vertical"
@@ -99,7 +98,7 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/source_sans_3_semi_bold"/>
 
-            <!-- Тёмная тема -->
+            <!-- Тёмная тема
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
@@ -137,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>-->
 
             <!-- Язык -->
             <com.google.android.material.card.MaterialCardView
@@ -149,6 +148,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
+                    android:id="@+id/layout_switch_language"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -187,6 +187,13 @@
                         android:layout_height="24dp"
                         android:src="@drawable/ic_arrow_right"
                         app:tint="@color/black" />
+
+                    <Spinner
+                        android:id="@+id/spinnerLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -250,6 +257,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
+                    android:id="@+id/layout_app_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -262,7 +270,7 @@
                         android:layout_height="24dp"
                         android:src="@drawable/ic_info"
                         android:layout_marginEnd="16dp"
-                        app:tint="@color/mainPurple" />
+                        app:tint="@color/mainGreenEmerald" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -301,6 +309,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
+                    android:id="@+id/layout_logout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -346,6 +355,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
+                    android:id="@+id/layout_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -387,6 +397,7 @@
                 android:foreground="?android:attr/selectableItemBackground">
 
                 <LinearLayout
+                    android:id="@+id/layout_data_reset"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"

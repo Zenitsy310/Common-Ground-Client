@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.adapter.UserAdapter;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.model.Role;
 import com.ark_das.springclient.model.User;
 import com.ark_das.springclient.retrofit.RetrofitService;
@@ -37,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private long backPressedTime = 0;
@@ -108,9 +109,9 @@ public class UserListActivity extends AppCompatActivity {
         bottomMenuView.setOnItemSelectedListener(id -> {
             if (id == R.id.nav_event) {
                 startActivity(new Intent(this, EventListActivity.class));
-            } else if (id == R.id.nav_chat) {
+            }/* else if (id == R.id.nav_chat) {
                 startActivity(new Intent(this, ChatListActivity.class));
-            } else if (id == R.id.nav_profile) {
+            } */else if (id == R.id.nav_profile) {
                 startActivity(new Intent(this, UserProfileActivity.class));
             } else if (id == R.id.nav_settings) {
                 startActivity(new Intent(this, SettingsActivity.class));

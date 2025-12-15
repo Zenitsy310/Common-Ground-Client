@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme for Night mode -->
     <style name="Base.Theme.CommonGround" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Цвета для тёмной темы -->
+        <item name="colorPrimary">@color/darkGreen</item>  <!-- Темно-зеленый для основной кнопки -->
+        <item name="colorPrimaryVariant">@color/darkPurple</item>  <!-- Темно-фиолетовый для вариантов -->
+        <item name="colorOnPrimary">@color/white</item>  <!-- Белый цвет для текста на основной кнопке -->
+        <item name="colorSecondary">@color/darkPurpleLight</item>  <!-- Светлый фиолетовый для вторичных элементов -->
+        <item name="colorSecondaryVariant">@color/darkPurple</item>  <!-- Основной цвет для вторичных элементов -->
+        <item name="colorOnSecondary">@color/white</item>  <!-- Белый для текста на вторичных элементах -->
+        <item name="android:statusBarColor">@color/darkGreen</item>  <!-- Темный цвет для статус-бара -->
+        <item name="android:windowBackground">@color/darkBackground</item>  <!-- Темный фон окна -->
     </style>
+
+    <style name="Theme.CommonGround" parent="Base.Theme.CommonGround" />
 </resources>

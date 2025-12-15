@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ark_das.springclient.R;
+import com.ark_das.springclient.base_activity.BaseActivity;
 import com.ark_das.springclient.dto.LoginResponse;
 import com.ark_das.springclient.dto.UserRequest;
 import com.ark_das.springclient.dto.UserResponse;
@@ -44,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserForm extends AppCompatActivity implements Validator.ValidationListener {
+public class UserForm extends BaseActivity implements Validator.ValidationListener {
 
     private Bundle arguments;
     private int userId;
