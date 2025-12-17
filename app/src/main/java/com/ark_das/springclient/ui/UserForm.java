@@ -1,5 +1,7 @@
 package com.ark_das.springclient.ui;
 
+import static android.view.View.GONE;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -354,10 +356,11 @@ public class UserForm extends BaseActivity implements Validator.ValidationListen
 
     private void setupEditMode(){
         setUserInfoById();
+        layout_form_textFieldPassword.setVisibility(GONE);
     }
 
     private void setupCreateMode(){
-        buttonDelete.setVisibility(View.GONE);;
+        buttonDelete.setVisibility(GONE);;
     }
     private void registerUser(User user){
         RetrofitService retrofitService = new RetrofitService();

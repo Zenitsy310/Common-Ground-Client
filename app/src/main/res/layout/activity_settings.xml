@@ -40,7 +40,7 @@
                     android:src="@drawable/ic_settings"
                     app:tint="@color/white"
                     android:layout_marginEnd="16dp"
-                    android:contentDescription="Settings"
+                    android:contentDescription="@string/settings"
                     android:clickable="true"
                     android:focusable="true"/>
 
@@ -55,7 +55,7 @@
                         android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Настройки"
+                        android:text="@string/settings"
                         android:textColor="@color/white"
                         android:textSize="26sp"
                         android:fontFamily="@font/abril_fatface_regular"/>
@@ -65,7 +65,7 @@
                         android:id="@+id/toolbar_subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Персонализация вашего приложения"
+                        android:text="@string/your_app_settings"
                         android:textColor="#CCFFFFFF"
                         android:textSize="14sp"
                         android:fontFamily="@font/source_sans_3_medium"/>
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Персонализация"
+                android:text="@string/personalisation"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp"
@@ -166,7 +166,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Язык"
+                        android:text="@string/language"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_regular"
@@ -176,7 +176,7 @@
                         android:id="@+id/current_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RU"
+                        android:text="@string/ru"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_medium"
@@ -201,7 +201,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Система"
+                android:text="@string/system"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp"
@@ -234,7 +234,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Уведомления"
+                        android:text="@string/notifications"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_regular"
@@ -275,7 +275,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="О приложении"
+                        android:text="@string/about_app"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_regular"
@@ -293,7 +293,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Аккаунт"
+                android:text="@string/account"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp"
@@ -328,7 +328,7 @@
                         android:id="@+id/login_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Выйти"
+                        android:text="@string/exit"
                         android:textColor="@color/mainGreen"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_medium"/>
@@ -339,7 +339,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Безопасность"
+                android:text="@string/security"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp"
@@ -373,7 +373,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Смена пароля"
+                        android:text="@string/change_password"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_regular"
@@ -415,7 +415,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Сброс данных"
+                        android:text="@string/data_recet"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_regular"/>

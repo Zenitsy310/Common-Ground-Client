@@ -47,7 +47,7 @@
                         android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Редактирование профиля"
+                        android:text="@string/edit_profile"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_semi_bold" />
@@ -285,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Сохранить профиль"
+                    android:text="@string/save_profile"
                     android:textColor="@color/white"
                     app:backgroundTint="@color/mainPurple"
                     style="@style/Widget.Material3.Button" />

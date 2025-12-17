@@ -111,5 +111,41 @@
     <string name="app_logo_desc">Логотип</string>
 
     <string name="settings_subtitle">Персонализация вашего приложения</string>
+    <string name="settings">Настройки</string>
+    <string name="your_app_settings">Персонализация вашего приложения</string>
+    <string name="personalisation">Персонализация</string>
+    <string name="language">Язык</string>
+    <string name="ru">RU</string>
+    <string name="system">Система</string>
+    <string name="notifications">Уведомления</string>
+    <string name="about_app">О приложении</string>
+    <string name="account">Аккаунт</string>
+    <string name="exit">Выйти</string>
+    <string name="security">Безопасность</string>
+    <string name="change_password">Смена пароля</string>
+    <string name="data_recet">Сброс данных</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="already_have_an_account">Уже есть аккаунт?</string>
+    <string name="version_1_0_0">Версия: 1.0.0</string>
+    <string name="description">Описание</string>
+    <string name="about_info_value">Это приложение для управления событиями, пользователями и чатом.</string>
+    <string name="developer">Разработчик</string>
+    <string name="ark_das_studio">ARK_DAS Studio</string>
+    <string name="close">Закрыть</string>
+    <string name="old_password">Старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="confirm_new_password">Подтвердите новый пароль</string>
+    <string name="edit_profile">Редактирование профиля</string>
+    <string name="save_profile">Сохранить профиль</string>
+    <string name="community_platform">Community Platform</string>
+    <string name="loading">Загрузка</string>
+    <string name="profile">Профиль</string>
+    <string name="view_profile">Просмотр профиля</string>
+    <string name="name">Имя</string>
+    <string name="email_example_com">email@example.com</string>
+    <string name="about_me">О себе</string>
+    <string name="description_user_profile">Описание профиля пользователя</string>
+    <string name="date_of_regastration">Дата регистрации</string>
+    <string name="registred_15_2023">Зарегистрирован 15 марта 2023 г.</string>
 
 </resources>

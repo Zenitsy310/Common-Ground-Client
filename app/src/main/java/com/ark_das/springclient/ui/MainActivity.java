@@ -1,5 +1,7 @@
 package com.ark_das.springclient.ui;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -258,7 +260,7 @@ public class MainActivity extends BaseActivity {
                 loadingDotsCount = (loadingDotsCount + 1) % 4;
 
                 // Создаем строку с точками
-                StringBuilder dotsBuilder = new StringBuilder("Загрузка");
+                StringBuilder dotsBuilder = new StringBuilder(getString(R.string.loading));
                 for (int i = 0; i < loadingDotsCount; i++) {
                     dotsBuilder.append(".");
                 }
