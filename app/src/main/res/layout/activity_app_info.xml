@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="О приложении"
+                    android:text="@string/about_app"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/abril_fatface_regular"
@@ -82,7 +82,7 @@
                         android:id="@+id/textVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Версия: 1.0.0"
+                        android:text="@string/version_1_0_0"
                         android:textColor="@color/mainGreen"
                         android:textSize="16sp"
                         android:fontFamily="@font/source_sans_3_medium"
@@ -106,7 +106,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="Описание"
+                        android:text="@string/description"
                         android:textColor="@color/mainPurple"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                         android:id="@+id/textDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Это приложение для управления событиями, пользователями и чатом."
+                        android:text="@string/about_info_value"
                         android:textColor="@color/mainGreen"
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="Разработчик"
+                        android:text="@string/developer"
                         android:textColor="@color/mainPurple"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                         android:id="@+id/textAuthor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ARK_DAS Studio"
+                        android:text="@string/ark_das_studio"
                         android:textColor="@color/mainGreen"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp"
@@ -163,7 +163,7 @@
                 android:id="@+id/btnCloseDialog"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Закрыть"
+                android:text="@string/close"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/mainPurple" />
         </LinearLayout>

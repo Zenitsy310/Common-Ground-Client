@@ -21,11 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.ark_das.springclient.data.NotificationDataLoader;
 import com.ark_das.springclient.data.NotificationDataSaver;
 import com.ark_das.springclient.data.UserDataLoader;
 import com.ark_das.springclient.data.UserDataSaver;
@@ -109,6 +111,7 @@ public class SettingsActivity extends BaseActivity {
     public void dataReset(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().clear().apply();
+        logout();
 
     }
     public void confirmDataReset(){
@@ -210,8 +213,14 @@ public class SettingsActivity extends BaseActivity {
                 String selectedCode = codes[position];
 
                 if (!selectedCode.equals(LocaleHelper.getLanguage(SettingsActivity.this))) {
+                    // Устанавливаем новый язык
                     LocaleHelper.setLocale(SettingsActivity.this, selectedCode);
-                    recreate(); // перерисовываем экран
+
+                    // Перезапускаем активити без анимации
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                    overridePendingTransition(0, 0); // убираем мерцание
                 }
             }
 
@@ -220,7 +229,9 @@ public class SettingsActivity extends BaseActivity {
         });
     }
 
+
     private void setupSwitches() {
+        switchNotifications.setChecked(getNotificationResolve());
         // Уведомления
         switchNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -237,6 +248,11 @@ public class SettingsActivity extends BaseActivity {
         saver.saveNotificationResolve(this,resolve);
     }
 
+    private boolean getNotificationResolve(){
+        NotificationDataLoader loader = new NotificationDataLoader();
+        return loader.isResolve(this);
+    }
+
     private void setupBottomMenu() {
         bottomMenuView.setActive(R.id.nav_settings);
 
@@ -251,5 +267,19 @@ public class SettingsActivity extends BaseActivity {
                 startActivity(new Intent(this, UserProfileActivity.class));
             }
         });
+    }
+    @Override
+    public void onConfigurationChanged(@NonNull android.content.res.Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Перерисовываем layout БЕЗ уничтожения Activity
+        setContentView(R.layout.activity_settings);
+
+        // заново инициализируем всё
+        initViews();
+        setupListenets();
+        setupLanguageSpinner();
+        setupSwitches();
+        setupBottomMenu();
     }
 }

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- App name -->
     <string name="app_name">Common Ground</string>
 
-    <string name="form_title">User List</string>
+    <string name="form_title">Users List</string>
     <string name="form_title_add_user">Edit User</string>
     <string name="avatar_description">Avatar description</string>
     <string name="change_avatar">Change avatar</string>
@@ -38,7 +37,7 @@
     <string name="login_back">Welcome back! Please sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign up</string>
-    <string name="Dont_have_an_account">Dont have an account?</string>
+    <string name="Dont_have_an_account">Don’t have an account?</string>
 
     <!-- List user items -->
     <string name="list_user_item_login">User login</string>
@@ -49,7 +48,7 @@
     <string name="first_fragment_label">First fragment</string>
     <string name="second_fragment_label">Second fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="previous">Back</string>
     <string name="no_users_found">No users found</string>
     <string name="user_avatar">User avatar</string>
     <string name="more_actions">More actions</string>
@@ -61,7 +60,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">Welcome!</string>
     <string name="invalid_username">Invalid username</string>
-    <string name="invalid_password">Password must contain more than 5 characters</string>
+    <string name="invalid_password">Password must be longer than 5 characters</string>
     <string name="login_failed">Login failed</string>
 
     <!-- Event pages -->
@@ -70,7 +69,7 @@
     <!-- Activity_event_form -->
     <string name="select_date_time">Select date and time</string>
     <string name="new_event">New event</string>
-    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="fill_all_fields">Fill in all fields</string>
     <string name="main_info">MAIN INFORMATION</string>
     <string name="event_description">Detailed description</string>
     <string name="place_and_time">PLACE AND TIME</string>
@@ -86,21 +85,23 @@
     <string name="add_user_fab">Create</string>
     <string name="icon_user">Avatar</string>
 
+    <!-- Technical / non-translatable -->
     <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+    <string name="title_activity_test" translatable="false">test</string>
+
     <string name="action_settings">Settings</string>
 
-    <string name="events_list">Event list</string>
+    <string name="events_list">Events list</string>
     <string name="all_current_events">All current events</string>
     <string name="no_events_found">No events found</string>
 
     <string name="tag">Tag</string>
     <string name="event_name">Event name</string>
     <string name="event_create_by">Created by</string>
-    <string name="title_activity_test" translatable="false">test</string>
-    <string name="icon_event">Event list</string>
+    <string name="icon_event">Events list</string>
     <string name="add_event_fab">Create event</string>
     <string name="date_and_time">Date and time</string>
-    <string name="max_tags">Select tags (max. 3)</string>
+    <string name="max_tags">Select tags (max 3)</string>
 
     <string name="save">SAVE</string>
     <string name="cancel">CANCEL</string>
@@ -109,6 +110,42 @@
     <string name="event">Event</string>
     <string name="app_logo_desc">Logo</string>
 
-    <string name="settings_subtitle">Customize your application</string>
+    <string name="settings_subtitle">Personalize your application</string>
+    <string name="settings">Settings</string>
+    <string name="your_app_settings">Personalize your application</string>
+    <string name="personalisation">Personalization</string>
+    <string name="language">Language</string>
+    <string name="ru">RU</string>
+    <string name="system">System</string>
+    <string name="notifications">Notifications</string>
+    <string name="about_app">About app</string>
+    <string name="account">Account</string>
+    <string name="exit">Logout</string>
+    <string name="security">Security</string>
+    <string name="change_password">Change password</string>
+    <string name="data_recet">Reset data</string>
+    <string name="create_account">Create account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="version_1_0_0">Version: 1.0.0</string>
+    <string name="description">Description</string>
+    <string name="about_info_value">This application is designed to manage events, users, and chats.</string>
+    <string name="developer">Developer</string>
+    <string name="ark_das_studio">ARK_DAS Studio</string>
+    <string name="close">Close</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="save_profile">Save profile</string>
+    <string name="community_platform">Community Platform</string>
+    <string name="loading">Loading</string>
+    <string name="profile">Profile</string>
+    <string name="view_profile">View profile</string>
+    <string name="name">Name</string>
+    <string name="email_example_com">email@example.com</string>
+    <string name="about_me">About me</string>
+    <string name="description_user_profile">User profile description</string>
+    <string name="date_of_regastration">Registration date</string>
+    <string name="registred_15_2023">Registered on March 15, 2023</string>
 
 </resources>
