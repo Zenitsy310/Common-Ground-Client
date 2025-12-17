@@ -39,6 +39,7 @@ import com.ark_das.springclient.retrofit.UserApi;
 import com.ark_das.springclient.util.LocaleHelper;
 import com.ark_das.springclient.R;
 import com.ark_das.springclient.base_activity.BaseActivity;
+import com.ark_das.springclient.util.PrefsConstants;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,10 +110,23 @@ public class SettingsActivity extends BaseActivity {
 
 
     public void dataReset(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().clear().apply();
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().apply();*/
+        clearPrefs();
         logout();
+    }
+    public void clearPrefs(){
+        // Получаем SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefsConstants.PREF_NAME, MODE_PRIVATE);
 
+// Создаем редактор
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+// Очистить все значения
+        editor.clear();
+
+// Сохраняем изменения
+        editor.apply();
     }
     public void confirmDataReset(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

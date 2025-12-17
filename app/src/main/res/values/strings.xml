@@ -147,5 +147,6 @@
     <string name="description_user_profile">Описание профиля пользователя</string>
     <string name="date_of_regastration">Дата регистрации</string>
     <string name="registred_15_2023">Зарегистрирован 15 марта 2023 г.</string>
+    <string name="confirm_password">Подтвердите пароль</string>
 
 </resources>
